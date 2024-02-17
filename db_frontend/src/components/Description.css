@@ -1,0 +1,38 @@
+.Description{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    color: #666666;
+    background-color: white;
+    padding: 50px 0;
+    box-sizing: border-box;
+    display: table;
+}
+
+.Description p{
+    position: relative;
+    width: 45%;
+    margin: 20px auto;
+    font-size: 20px;
+    float: right;
+    right: 10%;
+    text-align: start;
+}
+
+.Description img {
+    width: 600px;
+    position: relative;
+    left: 10%;
+    float: left;
+    border-radius: 10px;
+}
+
+@media (min-width: 992px) and (max-width: 1600px) {
+    .Description p{
+        right: 5%;
+    }
+    
+    .Description img {
+        left: 5%;
+    }
+}

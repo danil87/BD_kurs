@@ -24,7 +24,7 @@ function Header() {
                 <Toolbar disableGutters>
                     <Box sx={{my: 2, height: '50px', width: '50px'}}>
                         <Icon
-                        sx={{width: '50px', display: 'block', height: '50px'}}
+                        sx={{width: '50px', display: 'block', height: '60px'}}
                         >
                             <img className='Header__logo' src="./rainbow.svg" />
                         </Icon>

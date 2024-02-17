@@ -1,0 +1,15 @@
+.CardList{
+    position: relative;
+    background-color: white;
+    z-index: 2;
+    top: 0;
+    background-color: #f4f0ed;
+}
+
+.CardList__content{
+    margin: 70px auto 0 auto;
+    padding-top: 40px;
+    display: flex;
+    width: 1200px;
+    flex-wrap: wrap;
+}

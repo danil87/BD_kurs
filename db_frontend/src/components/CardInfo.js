@@ -15,7 +15,7 @@ function CardInfo() {
                     image="https://mp6.siedlce.pl/wp/wp-content/uploads/2021/03/baner2.jpg"
                     alt="green iguana"
                 />
-                <CardContent>
+                <CardContent sx={{backgroundColor: '#76c9ff'}}>
                     <Typography gutterBottom variant="h5" component="div">
                         Lizard
                     </Typography>

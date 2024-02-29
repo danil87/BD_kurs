@@ -6,9 +6,31 @@ import Button from '@mui/material/Button';
 import Icon from '@mui/material/Icon';
 import { createTheme, getContrastRatio, alpha } from '@mui/material';
 import AuthorizationButton from '../AuthorizationButton/AuthorizationButton';
+import { Link } from 'react-router-dom';
 import './Header.css'
 
-const pages = ['расписание', 'Специалисты', 'Отзывы', 'О нас'];
+const pages = [
+    {
+        title: 'Главная',
+        path: '/'
+    },
+    {
+        title: 'расписание',
+        path: '/schedule'
+    },
+    {
+        title: 'Специалисты',
+        path: '/specialists'
+    },
+    {
+        title: 'Отзывы',
+        path: '/reviews'
+    },
+    {
+        title: 'О нас',
+        path: '/aboutUs'
+    }
+];
 
 const theme = createTheme({
     palette: {
@@ -22,7 +44,7 @@ const theme = createTheme({
             contrastText: getContrastRatio('#fb8627', '#fff') > 4.5 ? '#fff' : '#111',
         }
     }
-  })
+})
 
 function Header() {
     return (
@@ -30,20 +52,24 @@ function Header() {
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Box sx={{ my: 2, height: '50px', width: '50px' }}>
-                        <Icon
-                            sx={{ width: '50px', display: 'block', height: '60px' }}
-                        >
-                            <img className='Header__logo' src="./children-s-leisure-center.svg" alt="" />
-                        </Icon>
+                        <Link to="/">
+                            <Icon
+                                sx={{ width: '50px', display: 'block', height: '60px' }}
+                            >
+                                <img className='Header__logo' src="./children-s-leisure-center.svg" alt="" />
+                            </Icon>
+                        </Link>
                     </Box>
                     <Box sx={{ flexGrow: 1, color: 'white', display: { xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>
                         {pages.map((page) => (
-                            <Button
-                                key={page}
-                                sx={{ my: 2, color: 'gray', display: 'block', marginRight: '20px' }}
-                            >
-                                {page}
-                            </Button>
+                            <Link to={page.path}>
+                                <Button
+                                    key={page.title}
+                                    sx={{ my: 2, color: 'gray', display: 'block', marginRight: '20px' }}
+                                >
+                                    {page.title}
+                                </Button>
+                            </Link>
                         ))}
                         <AuthorizationButton theme={theme} color="white" />
                     </Box>

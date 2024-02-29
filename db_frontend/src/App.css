@@ -6,11 +6,19 @@ html, body {
   margin: 0;
 }
 
+#root {
+  height: 100%;
+}
+
 .App {
   background-color: #fff;
   text-align: center;
   color: #666666;
   font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .App-logo {

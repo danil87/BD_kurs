@@ -2,9 +2,9 @@ import CardInfo from "../CardInfo/CardInfo";
 import './CardList.css'
 
 
-function CardList() {
+function CardList({myStyle}) {
     return (
-        <div className="CardList">
+        <div className="CardList" style={myStyle}>
             <div className="CardList__content"><CardInfo />
                 <CardInfo />
                 <CardInfo />

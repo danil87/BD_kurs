@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Icon from '@mui/material/Icon';
 import { createTheme, getContrastRatio, alpha } from '@mui/material';
-import AuthorizationButton from './AuthorizationButton';
+import AuthorizationButton from '../AuthorizationButton/AuthorizationButton';
 import './Header.css'
 
 const pages = ['расписание', 'Специалисты', 'Отзывы', 'О нас'];
@@ -33,7 +33,7 @@ function Header() {
                         <Icon
                             sx={{ width: '50px', display: 'block', height: '60px' }}
                         >
-                            <img className='Header__logo' src="./children-s-leisure-center.svg" />
+                            <img className='Header__logo' src="./children-s-leisure-center.svg" alt="" />
                         </Icon>
                     </Box>
                     <Box sx={{ flexGrow: 1, color: 'white', display: { xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>

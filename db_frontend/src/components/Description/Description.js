@@ -3,7 +3,7 @@ import './Description.css'
 function Description() {
     return (
         <div className="Description">
-            <img src='https://www.msunicov.cz/dbimg/image/20_21/little-kid-playing.jpg' />
+            <img alt="" src='https://idei.club/uploads/posts/2022-11/1667300180_43-idei-club-p-dizain-detskii-razvivayushchii-tsentr-vkon-43.jpg' />
             <p>
                 Добро пожаловать в удивительный мир детского центра “Радуга”! Мы рады приветствовать Вас на нашем сайте и готовы предложить Вашему вниманию самые интересные и увлекательные занятия для детей всех возрастов.
             </p>

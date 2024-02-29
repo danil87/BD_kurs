@@ -1,4 +1,4 @@
-import AuthorizationButton from './AuthorizationButton';
+import AuthorizationButton from '../AuthorizationButton/AuthorizationButton';
 import { createTheme, alpha, getContrastRatio } from '@mui/material';
 import './MainImg.css'
 
@@ -22,8 +22,8 @@ function MainImg() {
             <img className="MainImg_img" src="https://mp6.siedlce.pl/wp/wp-content/uploads/2021/03/baner2.jpg" alt="d" />
             <div className='MainImg__description circle blue'>
                 <h2>Радуга - мир развития и веселья!</h2>
-                <p>
-                    awdadawdawd
+                <p className='MainImg__Text1'>
+                Текст раздела 1 Текст раздела 1 Текст раздела 1 Текст раздела 1 Текст раздела 1 Текст раздела 1 Текст раздела 1 Текст раздела 1 Текст раздела 1 
                 </p>
                 <AuthorizationButton theme={theme} color="#1d7cfb" />
             </div>

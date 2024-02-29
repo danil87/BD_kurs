@@ -1,6 +1,6 @@
-import CardList from './CardList';
-import Description from './Description';
-import MainImg from './MainImg';
+import CardList from '../CardList/CardList';
+import Description from '../Description/Description';
+import MainImg from '../MainImg/MainImg';
 import './Main.css'
 
 function Main() {

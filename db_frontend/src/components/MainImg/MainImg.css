@@ -4,6 +4,19 @@
     z-index: 0;
 }
 
+.MainImg_img{
+    display: block;
+    width: 100%;
+}
+
+.MainImg__description.circle.blue{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 10%;
+    box-sizing: border-box;
+}
+
 .circle {
     border-radius: 100%;
     position: absolute;
@@ -11,8 +24,6 @@
 
 .circle.blue {
     background-color: #1d7cfb;
-    /* background: rgb(63,94,251);
-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(17,30,159,1) 64%); */
     height: 600px;
     width: 600px;
     bottom: -20%;
@@ -34,6 +45,11 @@ background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(17,30,159,1) 64%)
     height: 150px;
     bottom: 1%;
     left: 38%
+}
+
+.MainImg__Text1{
+    width: 70%;
+    margin: 0 auto;
 }
 
 .MainImg__description h2, 

@@ -2,7 +2,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { CardActionArea } from '@mui/material';
 // import './CardInfo.css'
 
 function CardInfo() {
@@ -15,7 +15,7 @@ function CardInfo() {
                     image="https://mp6.siedlce.pl/wp/wp-content/uploads/2021/03/baner2.jpg"
                     alt="green iguana"
                 />
-                <CardContent>
+                <CardContent sx={{backgroundColor: '#76c9ff'}}>
                     <Typography gutterBottom variant="h5" component="div">
                         Lizard
                     </Typography>

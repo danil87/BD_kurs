@@ -1,4 +1,4 @@
-import CardInfo from "./CardInfo";
+import CardInfo from "../CardInfo/CardInfo";
 import './CardList.css'
 
 

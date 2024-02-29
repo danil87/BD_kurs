@@ -62,9 +62,8 @@ function Header() {
                     </Box>
                     <Box sx={{ flexGrow: 1, color: 'white', display: { xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>
                         {pages.map((page) => (
-                            <Link to={page.path}>
+                            <Link key={page.title} to={page.path} style={{ textDecoration: 'none' }}>
                                 <Button
-                                    key={page.title}
                                     sx={{ my: 2, color: 'gray', display: 'block', marginRight: '20px' }}
                                 >
                                     {page.title}

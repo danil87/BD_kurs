@@ -19,8 +19,6 @@ const tableHeader = [
                 event.stopPropagation();
             };
 
-            console.log(params);
-
             return (
                 <Button
                     onClick={onClick}
@@ -142,14 +140,12 @@ function ClassSchedule() {
             <DataGrid
                 rows={rows}
                 columns={tableHeader}
-                // initialState={{
-                //     pagination: {
-                //         paginationModel: { page: 0, pageSize: 10 },
-                //     },
-                // }}
+                initialState={{
+                    pagination: {
+                        paginationModel: { page: 0, pageSize: 10 },
+                    },
+                }}
                 disableRowSelectionOnClick
-                autoHeight
-                autoPageSize
             />
         </div>
     )

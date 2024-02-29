@@ -3,6 +3,7 @@ import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 import { Route, Routes } from 'react-router-dom';
 import ClassSchedule from './components/ClassSchedule/ClassSchedule';
+import SpecialistsList from './components/SpecialiststList/SpecialistsList';
 import './App.css';
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Main />} />
         <Route path='/schedule' element={ <ClassSchedule /> } />
-        <Route path='/specialists' />
+        <Route path='/specialists' element={<SpecialistsList />} />
         <Route path='/reviews' />
         <Route path='/aboutUs' />
       </Routes>

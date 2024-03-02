@@ -7,7 +7,9 @@ import Icon from '@mui/material/Icon';
 import { createTheme, getContrastRatio, alpha } from '@mui/material';
 import AuthorizationButton from '../AuthorizationButton/AuthorizationButton';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import './Header.css'
+import UserMenu from '../UserMenu/UserMenu';
 
 const pages = [
     {
@@ -25,10 +27,6 @@ const pages = [
     {
         title: 'Отзывы',
         path: '/reviews'
-    },
-    {
-        title: 'О нас',
-        path: '/aboutUs'
     }
 ];
 
@@ -47,8 +45,10 @@ const theme = createTheme({
 })
 
 function Header() {
+    const [isUserAuth, setIsUserAuth] = useState(true);
+
     return (
-        <AppBar position="fixed" theme={theme} color="primary" >
+        <AppBar position="fixed" theme={theme} color="primary" className='Header'>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Box sx={{ my: 2, height: '50px', width: '50px' }}>
@@ -70,7 +70,11 @@ function Header() {
                                 </Button>
                             </Link>
                         ))}
-                        <AuthorizationButton theme={theme} color="white" />
+                        {isUserAuth ?
+                            <UserMenu theme={theme} logOut={() => setIsUserAuth(false)} />
+                            :
+                            <AuthorizationButton theme={theme} color="white" />
+                        }
                     </Box>
                 </Toolbar>
             </Container>

@@ -6,6 +6,11 @@ html, body {
   margin: 0;
 }
 
+body {
+  overflow-y: scroll !important;
+  padding-right: 0 !important;
+}
+
 #root {
   height: 100%;
 }

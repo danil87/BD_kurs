@@ -1,5 +1,4 @@
 import { Avatar, Divider, Rating } from "@mui/material";
-import { Fragment } from "react";
 import './UsersReviews.css'
 
 const reviews = [
@@ -118,7 +117,7 @@ const reviews = [
 function UsersReviews() {
     return (
         <div className="UsersReviews">
-            {reviews.map((review) => (
+            {reviews.map((review, index) => (
                 <div className="UsersReviews__review" key={review.id}>
                     <div className="UsersReviews__review-header">
                         <div className="review-header__user-info">
@@ -141,7 +140,7 @@ function UsersReviews() {
                     <div className="UsersReviews__body">
                         {review.text}
                     </div>
-                    <Divider />
+                    { index !== reviews.length - 1 && <Divider />}
                 </div>
             ))}
         </div>

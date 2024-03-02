@@ -4,9 +4,9 @@ import Footer from './components/Footer/Footer';
 import { Route, Routes } from 'react-router-dom';
 import ClassSchedule from './components/ClassSchedule/ClassSchedule';
 import SpecialistsList from './components/SpecialiststList/SpecialistsList';
-import './App.css';
 import UsersReviews from './components/UsersReviews/UsersReviews';
-import AboutUs from './components/AboutUs/AboutUs';
+import PersonalAccount from './components/PersonalAccount/PersonalAccount';
+import './App.css';
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <Route path='/schedule' element={<ClassSchedule />} />
         <Route path='/specialists' element={<SpecialistsList />} />
         <Route path='/reviews' element={<UsersReviews />} />
-        {/* <Route path='/aboutUs' element={<AboutUs />} /> */}
+        <Route path='/cabinet' element={<PersonalAccount />} />
       </Routes>
       <Footer />
     </div>

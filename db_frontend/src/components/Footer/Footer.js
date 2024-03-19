@@ -1,7 +1,7 @@
 import './Footer.css';
 
 function Footer() {
-    return (
+  return (
         <footer className="Footer">
             <div className='Footer__content'>
                 <p>
@@ -11,7 +11,7 @@ function Footer() {
                 </p>
             </div>
         </footer>
-    )
+  );
 }
 
 export default Footer;

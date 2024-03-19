@@ -1,3 +1,7 @@
+.Header {
+    padding-right: 0 !important;
+}
+
 .Header__logo{
     display: block;
     width: 50px;

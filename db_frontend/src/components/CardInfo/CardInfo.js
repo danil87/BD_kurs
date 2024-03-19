@@ -6,7 +6,7 @@ import { CardActionArea } from '@mui/material';
 // import './CardInfo.css'
 
 function CardInfo() {
-    return (
+  return (
         <Card className='CardInfo' sx={{ maxWidth: 345, maxHeight: 500, margin: '0 15px 30px 15px' }}>
             <CardActionArea>
                 <CardMedia
@@ -15,7 +15,7 @@ function CardInfo() {
                     image="https://mp6.siedlce.pl/wp/wp-content/uploads/2021/03/baner2.jpg"
                     alt="green iguana"
                 />
-                <CardContent sx={{backgroundColor: '#76c9ff'}}>
+                <CardContent sx={{ backgroundColor: '#76c9ff' }}>
                     <Typography gutterBottom variant="h5" component="div">
                         Lizard
                     </Typography>
@@ -26,7 +26,7 @@ function CardInfo() {
                 </CardContent>
             </CardActionArea>
         </Card>
-    )
+  );
 }
 
 export default CardInfo;

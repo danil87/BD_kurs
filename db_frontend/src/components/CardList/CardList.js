@@ -1,9 +1,8 @@
-import CardInfo from "../CardInfo/CardInfo";
-import './CardList.css'
+import CardInfo from '../CardInfo/CardInfo';
+import './CardList.css';
 
-
-function CardList({myStyle}) {
-    return (
+function CardList({ myStyle }) {
+  return (
         <div className="CardList" style={myStyle}>
             <div className="CardList__content"><CardInfo />
                 <CardInfo />
@@ -13,7 +12,7 @@ function CardList({myStyle}) {
                 <CardInfo />
             </div>
         </div>
-    )
+  );
 }
 
 export default CardList;

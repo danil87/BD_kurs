@@ -1,32 +1,34 @@
-import { Button, Avatar, Typography, Box, Menu, MenuItem } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import {
+  Button, Avatar, Typography, Box, Menu, MenuItem,
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const user = {
-    login: "User's login",
-    avatar: ''
+  login: "User's login",
+  avatar: '',
 };
 
 function UserMenu({ logOut, theme }) {
-    const navigate = useNavigate();
-    const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null);
 
-    function openMenu({ currentTarget }) {
-        setAnchorEl(currentTarget);
-    };
+  function openMenu({ currentTarget }) {
+    setAnchorEl(currentTarget);
+  }
 
-    function closeMenu() {
-        setAnchorEl(null);
-    }
+  function closeMenu() {
+    setAnchorEl(null);
+  }
 
-    function redirectToCabinet() {
-        navigate('/cabinet')
-    }
+  function redirectToCabinet() {
+    navigate('/cabinet');
+  }
 
-    return (
+  return (
         <Box>
             <Button theme={theme} color='secondary'
-                sx={{ my: 1 }} 
+                sx={{ my: 1 }}
                 onClick={openMenu}>
                 <Typography variant="span">{user.login}</Typography>
                 <Avatar sx={{ marginLeft: '20px' }} src={user.avatar} />
@@ -48,7 +50,7 @@ function UserMenu({ logOut, theme }) {
                 </MenuItem>
             </Menu>
         </Box>
-    );
+  );
 }
 
 export default UserMenu;

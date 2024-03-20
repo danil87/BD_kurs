@@ -5,11 +5,11 @@ import './Main.css';
 
 function Main() {
   return (
-        <main className="Main">
-            <MainImg />
-            <CardList />
-            <Description />
-        </main>
+    <main className="Main">
+      <MainImg />
+      <CardList />
+      <Description />
+    </main>
   );
 }
 

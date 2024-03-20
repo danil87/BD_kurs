@@ -1,5 +1,9 @@
 function PersonalAccount() {
-  return <></>;
+  return (
+    <>
+      <img alt="" />
+    </>
+  );
 }
 
 export default PersonalAccount;

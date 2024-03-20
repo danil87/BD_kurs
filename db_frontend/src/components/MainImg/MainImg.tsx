@@ -1,20 +1,5 @@
-import { createTheme, alpha, getContrastRatio } from '@mui/material';
 import AuthorizationButton from '../AuthorizationButton/AuthorizationButton';
 import './MainImg.css';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#fff',
-    },
-    secondary: {
-      main: '#fff',
-      light: alpha('#fff', 0.5),
-      dark: alpha('#fff', 0.9),
-      contrastText: getContrastRatio('#fff', '#fff') > 4.5 ? '#fff' : '#111',
-    },
-  },
-});
 
 function MainImg() {
   return (
@@ -27,7 +12,7 @@ function MainImg() {
           Текст раздела 1 Текст раздела 1 Текст раздела 1
           Текст раздела 1 Текст раздела 1 Текст раздела 1
         </p>
-        <AuthorizationButton theme={theme} color="#1d7cfb" />
+        <AuthorizationButton color="#1d7cfb" />
       </div>
       <div className='circle red' />
       <div className='circle green' />

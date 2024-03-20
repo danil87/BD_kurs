@@ -3,9 +3,9 @@ import './SpecialistsList.css';
 
 function SpecialistsList() {
   return (
-        <div className="SpecialistsList">
-            <CardList myStyle={{ backgroundColor: '#fff', height: '100%' }} />
-        </div>
+    <div className="SpecialistsList">
+      <CardList myStyle={{ backgroundColor: '#fff', height: '100%' }} />
+    </div>
   );
 }
 

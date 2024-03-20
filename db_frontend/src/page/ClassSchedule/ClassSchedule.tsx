@@ -16,8 +16,8 @@ const tableHeader = [
     field: 'subscribe',
     headerName: 'Записаться',
     width: 150,
-    renderCell: (params) => {
-      const onClick = (event) => {
+    renderCell: () => {
+      const onClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.stopPropagation();
       };
 

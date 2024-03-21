@@ -1,0 +1,13 @@
+.PersonalAccount {
+    display: flex;
+    justify-content: center;
+}
+
+.PersonalAccount__info {
+    max-width: 100%;
+}
+
+.PersonalAccount__img {
+    display: block;
+    width: 10%;
+}

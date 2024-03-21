@@ -10,19 +10,24 @@ import ClassSchedule from './page/ClassSchedule/ClassSchedule';
 import UsersReviews from './page/UsersReviews/UsersReviews';
 import PersonalAccount from './page/PersonalAccount/PersonalAccount';
 import './App.css';
-import { mainTheme } from './theme';
+import { secondaryTheme } from './theme';
 
 function App() {
   return (
-    <ThemeProvider theme={mainTheme}>
+    <ThemeProvider theme={secondaryTheme}>
       <Box className="App">
         <Header />
-        <Routes>
-          <Route path='/' element={<Main />} />
-          <Route path='/schedule' element={<ClassSchedule />} />
-          <Route path='/reviews' element={<UsersReviews />} />
-          <Route path='/cabinet' element={<PersonalAccount />} />
-        </Routes>
+        <Box sx={{ marginTop: '82px' }}>
+          <Routes>
+            <Route path='/' element={<Main />} />
+            <Route path='/schedule' element={<ClassSchedule />} />
+            <Route path='/reviews' element={<UsersReviews />} />
+            <Route path='/cabinet' element={<PersonalAccount />} >
+              <Route path='child' />
+              <Route path='record' />
+            </Route>
+          </Routes>
+        </Box>
         <Footer />
       </Box>
     </ThemeProvider >

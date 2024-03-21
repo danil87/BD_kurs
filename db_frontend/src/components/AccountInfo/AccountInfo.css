@@ -1,0 +1,22 @@
+.AccountInfo {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+}
+
+.AccountInfo__img {
+    position: relative;
+    float: left;
+}
+
+.AccountInfo__img__img {
+    display: block;
+    width: 400px;
+}
+
+.AccountInfo__info {
+    margin: 20px;
+    position: relative;
+    float: right;
+    width: 60%;
+}

@@ -13,10 +13,10 @@ const lessonApi = createApi({
             query: (id: number) => getQueryObject('/get', id)
         }),
         createNewLesson: build.mutation<void, ILesson>({
-            query: (newStaff: ILesson) => getQueryObject('/create', newStaff)
+            query: (newLesson: ILesson) => getQueryObject('/create', newLesson)
         }),
         updateLesson: build.mutation<void, ILesson>({
-            query: (staff: ILesson) => getQueryObject('/update', staff)
+            query: (lesson: ILesson) => getQueryObject('/update', lesson)
         }),
         removeLesson: build.mutation<void, number>({
             query: (id: number) => getQueryObject('/remove', id)

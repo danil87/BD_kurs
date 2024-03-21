@@ -1,8 +1,8 @@
 import {
-  Button, Avatar, Typography, Box, Menu, MenuItem, Popper, ThemeProvider, ClickAwayListener,
+  Button, Avatar, Typography, Box, MenuItem, ThemeProvider, Menu,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './UserMenu.css';
 import { secondaryTheme } from '../../theme';
 
@@ -20,8 +20,7 @@ function UserMenu({ logOut }: Props) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   function openMenu(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    console.log(1);
-    event.stopPropagation();
+    event.preventDefault();
     setAnchorEl(event.currentTarget);
   }
 
@@ -33,38 +32,33 @@ function UserMenu({ logOut }: Props) {
     navigate('/cabinet');
   }
 
-  useEffect(() => {
-    console.log(anchorEl);
-  }, [anchorEl]);
-
   return (
     <Box>
       <Button color='secondary'
         sx={{ my: 1 }}
-        // onClick={openMenu}
-        onClickCapture={openMenu}>
+        onClick={openMenu}>
         <Typography variant="spanBlock">{user.login}</Typography>
         <Avatar sx={{ marginLeft: '20px' }} src={user.avatar} />
       </Button>
-      <ClickAwayListener onClickAway={closeMenu}>
-        <Popper
-          className='UserMenu_popper'
-          sx={{ width: '300px', position: 'absolute' }}
-          id="menu-appbar"
-          open={Boolean(anchorEl)}
-          anchorEl={anchorEl}
-          disablePortal
-        >
-          <ThemeProvider theme={secondaryTheme}>
-            <MenuItem onClick={redirectToCabinet}>
-              <Typography color='primary' textAlign="center">Профиль</Typography>
-            </MenuItem>
-            <MenuItem onClick={logOut}>
-              <Typography color='primary' textAlign="center">Выйти</Typography>
-            </MenuItem>
-          </ThemeProvider>
-        </Popper>
-      </ClickAwayListener>
+      <Menu
+        className='UserMenu_popper'
+        sx={{ width: '300px', position: 'absolute' }}
+        id="menu-appbar"
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        onClose={closeMenu}
+        onChange={(event) => event.preventDefault()}
+        disableScrollLock
+      >
+        <ThemeProvider theme={secondaryTheme}>
+          <MenuItem onClick={redirectToCabinet}>
+            <Typography color='primary' textAlign="center">Профиль</Typography>
+          </MenuItem>
+          <MenuItem onClick={logOut}>
+            <Typography color='primary' textAlign="center">Выйти</Typography>
+          </MenuItem>
+        </ThemeProvider>
+      </Menu>
     </Box>
   );
 }

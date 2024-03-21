@@ -1,17 +1,21 @@
-import { DataGrid } from '@mui/x-data-grid';
-import { Button } from '@mui/material';
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { Button, ThemeProvider } from '@mui/material';
+import lessonApi from '../../services/LessonService';
+import { secondaryTheme } from '../../theme';
 import './ClassSchedule.css';
 
-const tableHeader = [
-  { field: 'title', headerName: 'Название', width: 200 },
+const tableHeader: GridColDef[] = [
+  { field: 'name', headerName: 'Название', width: 100 },
   {
-    field: 'specialist', headerName: 'Специалист', width: 150, aling: 'right',
+    field: 'staff_position', headerName: 'Специалист', width: 100, align: 'right',
   },
-  { field: 'date', headerName: 'Дата', width: 100 },
-  { field: 'timeStart', headerName: 'Время начала', width: 120 },
-  { field: 'timeEnd', headerName: 'Время окончания', width: 150 },
-  { field: 'age', headerName: 'Возраст', width: 100 },
-  { field: 'cost', headerName: 'Стоимость' },
+  {
+    field: 'date_lesson', headerName: 'Дата', width: 200, align: 'right',
+    valueGetter: (params: GridValueGetterParams) => new Date(params.value).toLocaleString()
+  },
+  { field: 'duration', headerName: 'Продолжительность', width: 150, align: 'right' },
+  { field: 'age', headerName: 'Возраст', width: 70, align: 'right' },
+  { field: 'price', headerName: 'Стоимость', align: 'right' },
   {
     field: 'subscribe',
     headerName: 'Записаться',
@@ -22,132 +26,36 @@ const tableHeader = [
       };
 
       return (
-        <Button
-          onClick={onClick}
-          sx={{ my: 2 }}
-        >
-          Записаться
-        </Button>
+        <ThemeProvider theme={secondaryTheme}>
+          <Button
+            color='secondary'
+            onClick={onClick}
+            sx={{ my: 2 }}
+          >
+            Записаться
+          </Button>
+        </ThemeProvider>
       );
     },
   },
 ];
 
-const rows = [
-  {
-    id: 1,
-    title: 'Dental cleaning',
-    specialist: 'Dentist',
-    date: '2022-11-15',
-    age: 'Adult',
-    cost: '$100',
-    timeStart: '12:00',
-    timeEnd: '13:00',
-  },
-  {
-    id: 2,
-    title: 'Eye exam',
-    specialist: 'Ophthalmologist',
-    date: '2022-10-20',
-    age: 'Adult',
-    cost: '$80',
-    timeStart: '12:00',
-    timeEnd: '13:00',
-  },
-  {
-    id: 3,
-    title: 'Flu shot',
-    specialist: 'Nurse',
-    date: '2022-09-25',
-    age: 'Adult',
-    cost: '$30',
-    timeStart: '12:00',
-    timeEnd: '13:00',
-  },
-  {
-    id: 4,
-    title: 'Physical therapy',
-    specialist: 'Physiotherapist',
-    date: '2022-10-05',
-    age: 'Senior',
-    cost: '$120',
-    timeStart: '12:00',
-    timeEnd: '13:00',
-  },
-  {
-    id: 5,
-    title: 'Blood test',
-    specialist: 'Lab Technician',
-    date: '2022-11-10',
-    age: 'Adult',
-    cost: '$50',
-    timeStart: '12:00',
-    timeEnd: '13:00',
-  },
-  {
-    id: 6,
-    title: 'X-ray',
-    specialist: 'Radiologist',
-    date: '2022-09-30',
-    age: 'Adult',
-    cost: '$70',
-    timeStart: '12:00',
-    timeEnd: '13:00',
-  },
-  {
-    id: 7,
-    title: 'Dermatology consultation',
-    specialist: 'Dermatologist',
-    date: '2022-10-12',
-    age: 'Adult',
-    cost: '$90',
-    timeStart: '12:00',
-    timeEnd: '13:00',
-  },
-  {
-    id: 8,
-    title: 'Child vaccination',
-    specialist: 'Pediatrician',
-    date: '2022-11-05',
-    age: 'Child',
-    cost: '$40',
-    timeStart: '12:00',
-    timeEnd: '13:00',
-  },
-  {
-    id: 9,
-    title: 'Chiropractic adjustment',
-    specialist: 'Chiropractor',
-    date: '2022-10-15',
-    age: 'Adult',
-    cost: '$60',
-    timeStart: '12:00',
-    timeEnd: '13:00',
-  },
-  {
-    id: 10,
-    title: 'Mental health counseling',
-    specialist: 'Psychologist',
-    date: '2022-09-20',
-    age: 'Adult',
-    cost: '$80',
-    timeStart: '12:00',
-    timeEnd: '13:00',
-  },
-];
 
 function ClassSchedule() {
+  const { data: lessons, isLoading } = lessonApi.useFetchAllLessonQuery();
+
   return (
     <div className='ClassSchedule'>
       <DataGrid
-        rows={rows}
+        rows={lessons || []}
         columns={tableHeader}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 10 },
+            paginationModel: { page: 1, pageSize: (lessons && lessons?.length > 10 ? 10 : lessons?.length) || 10 },
           },
         }}
         disableRowSelectionOnClick
+        loading={isLoading}
       />
     </div>
   );

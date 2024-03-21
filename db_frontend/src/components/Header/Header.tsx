@@ -22,10 +22,6 @@ const pages = [
     path: '/schedule',
   },
   {
-    title: 'Специалисты',
-    path: '/specialists',
-  },
-  {
     title: 'Отзывы',
     path: '/reviews',
   },

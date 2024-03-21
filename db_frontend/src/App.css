@@ -1,18 +1,25 @@
-html, body {
-  width: 100%;
+html {
+  height: 100%;
+}
+
+body {
   min-height: 100%;
+}
+
+html,
+body {
+  width: 100%;
   background: #ccc;
   padding: 0;
   margin: 0;
 }
 
 body {
-  overflow-y: scroll !important;
   padding-right: 0 !important;
 }
 
 #root {
-  height: 100%;
+  height: 100vh;
 }
 
 .App {
@@ -23,7 +30,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -56,6 +63,7 @@ body {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

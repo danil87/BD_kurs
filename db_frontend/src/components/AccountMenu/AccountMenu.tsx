@@ -1,10 +1,7 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from "@mui/material";
-// eslint-disable-next-line import/no-extraneous-dependencies
+import { Drawer, List, ListItem, ListItemButton, ListItemText, Toolbar } from "@mui/material";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import './AccountMenu.css';
-import { Button } from "@mui/base";
 
 const menuItem = [
     {

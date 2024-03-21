@@ -1,8 +1,10 @@
 import {
-  Button, Avatar, Typography, Box, Menu, MenuItem,
+  Button, Avatar, Typography, Box, MenuItem, ThemeProvider, Menu,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import './UserMenu.css';
+import { secondaryTheme } from '../../theme';
 
 const user = {
   login: "User's login",
@@ -17,8 +19,9 @@ function UserMenu({ logOut }: Props) {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-  function openMenu({ currentTarget }: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    setAnchorEl(currentTarget);
+  function openMenu(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    event.preventDefault();
+    setAnchorEl(event.currentTarget);
   }
 
   function closeMenu() {
@@ -38,20 +41,23 @@ function UserMenu({ logOut }: Props) {
         <Avatar sx={{ marginLeft: '20px' }} src={user.avatar} />
       </Button>
       <Menu
+        className='UserMenu_popper'
         sx={{ width: '300px', position: 'absolute' }}
         id="menu-appbar"
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
         onClose={closeMenu}
+        onChange={(event) => event.preventDefault()}
+        disableScrollLock
       >
-        <MenuItem onClick={redirectToCabinet}>
-          <Typography textAlign="center">Профиль</Typography>
-        </MenuItem>
-        <MenuItem onClick={logOut}>
-          <Typography textAlign="center">Выйти</Typography>
-        </MenuItem>
+        <ThemeProvider theme={secondaryTheme}>
+          <MenuItem onClick={redirectToCabinet}>
+            <Typography color='primary' textAlign="center">Профиль</Typography>
+          </MenuItem>
+          <MenuItem onClick={logOut}>
+            <Typography color='primary' textAlign="center">Выйти</Typography>
+          </MenuItem>
+        </ThemeProvider>
       </Menu>
     </Box>
   );

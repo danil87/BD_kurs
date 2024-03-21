@@ -1,12 +1,6 @@
-import { FetchArgs, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IStaff } from '../models/IStaff';
-
-const getQueryObject = (url: string, body?: any): FetchArgs => ({
-    url,
-    body,
-    mode: 'no-cors',
-    method: 'POST'
-});
+import getQueryObject from '.';
 
 const staffApi = createApi({
     reducerPath: 'staffApi',

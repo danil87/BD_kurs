@@ -33,7 +33,7 @@ export const mainTheme = createTheme({
 export const secondaryTheme = createTheme({
     palette: {
         primary: {
-            main: '#fff',
+            main: '#808080',
         },
         secondary: {
             main: '#fb8627',

@@ -1,0 +1,9 @@
+.RecordCard__form {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.RecordCard__form__select {
+    width: 100%;
+}

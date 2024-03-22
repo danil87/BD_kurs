@@ -1,11 +1,10 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import { rootReducer } from "./reducers";
 import staffApi from "../services/StaffService";
 import lessonApi from "../services/LessonService";
-
-const rootReducer = combineReducers({
-    [staffApi.reducerPath]: staffApi.reducer,
-    [lessonApi.reducerPath]: lessonApi.reducer
-});
+import childApi from "../services/ChildService";
+import parentApi from "../services/ParanrtService";
+import recordApi from "../services/RecordService";
 
 export const setupStore = () => configureStore({
     reducer: rootReducer,
@@ -13,6 +12,9 @@ export const setupStore = () => configureStore({
         getDefaultMiddleware()
             .concat(staffApi.middleware)
             .concat(lessonApi.middleware)
+            .concat(childApi.middleware)
+            .concat(parentApi.middleware)
+            .concat(recordApi.middleware)
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

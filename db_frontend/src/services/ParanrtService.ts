@@ -1,10 +1,10 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { IParent } from "../models/IParent";
-import getQueryObject from ".";
+import { getQueryObject, createBaseQuery } from ".";
 
-const ParentApi = createApi({
+const parentApi = createApi({
     reducerPath: 'ParentApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost/parent' }),
+    baseQuery: createBaseQuery('http://localhost/parent'),
     endpoints: (build) => ({
         fetchAllParent: build.query<IParent[], void>({
             query: () => getQueryObject('/list')
@@ -24,4 +24,4 @@ const ParentApi = createApi({
     })
 });
 
-export default ParentApi;
+export default parentApi;

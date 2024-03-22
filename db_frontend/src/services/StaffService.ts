@@ -1,10 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 import { IStaff } from '../models/IStaff';
-import getQueryObject from '.';
+import { getQueryObject, createBaseQuery } from '.';
 
 const staffApi = createApi({
     reducerPath: 'staffApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost/staff' }),
+    baseQuery: createBaseQuery('http://localhost/staff'),
     endpoints: (build) => ({
         fetchAllStaff: build.query<IStaff[], void>({
             query: () => getQueryObject('/list')

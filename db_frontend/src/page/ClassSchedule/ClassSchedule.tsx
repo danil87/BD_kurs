@@ -6,6 +6,7 @@ import './ClassSchedule.css';
 function ClassSchedule() {
   const { data: lessons, isLoading } = lessonApi.useFetchAllLessonQuery();
 
+
   return (
     <div className='ClassSchedule'>
       <TableGrid row={lessons} isLoading={isLoading} tableHeader={lessonHeader} />

@@ -1,9 +1,9 @@
 export interface IRecord {
-    id: number,
+    id?: number,
     parentId: number,
-    childId: number,
-    lessonId: number,
-    lessonDate: string,
-    childName: string,
-    parentName: string
+    childId: number | null,
+    lessonId: number | null,
+    lessonDate?: string,
+    childName?: string,
+    parentName?: string
 }

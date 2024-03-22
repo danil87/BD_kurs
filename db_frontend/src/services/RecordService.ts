@@ -1,18 +1,18 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { IRecord } from "../models/IRecord";
-import getQueryObject from ".";
+import { getQueryObject, createBaseQuery } from ".";
 
-const RecordApi = createApi({
+const recordApi = createApi({
     reducerPath: 'RecordApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost/record' }),
+    baseQuery: createBaseQuery('http://localhost/record'),
     endpoints: (build) => ({
         fetchAllRecord: build.query<IRecord[], void>({
-            query: () => getQueryObject('/list')
+            query: () => getQueryObject('/list', { filter: {}, navigation: {} })
         }),
         fetchOneRecord: build.query<IRecord, number>({
             query: (id: number) => getQueryObject('/get', id)
         }),
-        createNewRecord: build.mutation<void, IRecord>({
+        createNewRecord: build.mutation<IRecord, IRecord>({
             query: (newRecord: IRecord) => getQueryObject('/create', newRecord)
         }),
         updateRecord: build.mutation<void, IRecord>({
@@ -24,4 +24,4 @@ const RecordApi = createApi({
     })
 });
 
-export default RecordApi;
+export default recordApi;

@@ -10,11 +10,11 @@ import ClassSchedule from './page/ClassSchedule/ClassSchedule';
 import UsersReviews from './page/UsersReviews/UsersReviews';
 import PersonalAccount from './page/PersonalAccount/PersonalAccount';
 import './App.css';
-import { secondaryTheme } from './theme';
+import { mainTheme } from './theme';
 
 function App() {
   return (
-    <ThemeProvider theme={secondaryTheme}>
+    <ThemeProvider theme={mainTheme}>
       <Box className="App">
         <Header />
         <Box sx={{ marginTop: '82px' }}>

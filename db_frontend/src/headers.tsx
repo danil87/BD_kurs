@@ -1,6 +1,5 @@
-import { Button, ThemeProvider } from '@mui/material';
-import { GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
-import { secondaryTheme } from './theme';
+import { GridColDef, GridRenderCellParams, GridValueGetterParams } from "@mui/x-data-grid";
+import ButtonTable from './components/ButtonTable/ButtonTable';
 
 export const lessonHeader: GridColDef[] = [
   {
@@ -28,23 +27,9 @@ export const lessonHeader: GridColDef[] = [
     width: 200,
     headerAlign: 'center',
     align: 'center',
-    renderCell: () => {
-      const onClick = (event: React.MouseEvent) => {
-        event.stopPropagation();
-      };
-
-      return (
-        <ThemeProvider theme={secondaryTheme}>
-          <Button
-            color='secondary'
-            onClick={onClick}
-            sx={{ my: 2 }}
-          >
-            Записаться
-          </Button>
-        </ThemeProvider>
-      );
-    },
+    renderCell: (params: GridRenderCellParams) => (
+      <ButtonTable lessonId={params.row.id} lessonName={params.row.name} />
+    ),
   },
 ];
 

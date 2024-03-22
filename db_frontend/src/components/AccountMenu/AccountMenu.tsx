@@ -1,4 +1,5 @@
 import { Drawer, List, ListItem, ListItemButton, ListItemText, Toolbar } from "@mui/material";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import './AccountMenu.css';

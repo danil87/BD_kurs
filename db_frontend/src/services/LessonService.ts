@@ -1,13 +1,13 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { ILesson } from "../models/ILesson";
-import getQueryObject from ".";
+import { getQueryObject, createBaseQuery } from ".";
 
 const lessonApi = createApi({
     reducerPath: 'lessonApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost/lesson' }),
+    baseQuery: createBaseQuery('http://localhost/lesson'),
     endpoints: (build) => ({
         fetchAllLesson: build.query<ILesson[], void>({
-            query: () => getQueryObject('/list')
+            query: () => getQueryObject('/list', { filter: {}, navigation: {} })
         }),
         fetchOneLesson: build.query<ILesson, number>({
             query: (id: number) => getQueryObject('/get', id)

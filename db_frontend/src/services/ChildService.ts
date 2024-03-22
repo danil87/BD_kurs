@@ -1,13 +1,19 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { IChild } from "../models/IChild";
-import getQueryObject from ".";
+import { createBaseQuery, getQueryObject } from ".";
 
-const ChildApi = createApi({
+const childApi = createApi({
     reducerPath: 'ChildApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost/child' }),
+    baseQuery: createBaseQuery('http://localhost/child'),
     endpoints: (build) => ({
-        fetchAllChild: build.query<IChild[], void>({
-            query: () => getQueryObject('/list')
+        fetchAllChild: build.query<IChild[], number[]>({
+            query: (ids: number[]) => getQueryObject('/list', {
+                filter: {
+                    parentIds: ids
+                },
+                navigation: {}
+            }
+            )
         }),
         fetchOneChild: build.query<IChild, number>({
             query: (id: number) => getQueryObject('/get', id)
@@ -24,4 +30,4 @@ const ChildApi = createApi({
     })
 });
 
-export default ChildApi;
+export default childApi;

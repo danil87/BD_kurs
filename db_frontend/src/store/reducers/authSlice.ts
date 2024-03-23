@@ -16,10 +16,14 @@ export const authSlice = createSlice({
         login(state, action: PayloadAction<IUser>) {
             state.user = action.payload;
         },
+        updateStoreUser(state, action: PayloadAction<IUser>) {
+            state.user = action.payload;
+        },
         logout(state) {
             state.user = initialState.user;
         }
     }
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, updateStoreUser } = authSlice.actions;
+export type ActionType = typeof authSlice.actions;

@@ -6,7 +6,7 @@ const lessonApi = createApi({
     reducerPath: 'lessonApi',
     baseQuery: createBaseQuery('http://localhost/lesson'),
     endpoints: (build) => ({
-        fetchAllLesson: build.query<ILesson[], void>({
+        fetchAllLesson: build.mutation<ILesson[], void>({
             query: () => getQueryObject('/list', { filter: {}, navigation: {} })
         }),
         fetchOneLesson: build.query<ILesson, number>({

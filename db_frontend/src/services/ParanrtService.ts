@@ -4,7 +4,7 @@ import { getQueryObject, createBaseQuery } from ".";
 
 const parentApi = createApi({
     reducerPath: 'ParentApi',
-    baseQuery: createBaseQuery('http://localhost/parent'),
+    baseQuery: createBaseQuery('http://localhost/user'),
     endpoints: (build) => ({
         fetchAllParent: build.query<IUser[], void>({
             query: () => getQueryObject('/list')
@@ -16,7 +16,16 @@ const parentApi = createApi({
             query: (newParent: IUser) => getQueryObject('/create', newParent)
         }),
         updateParent: build.mutation<void, IUser>({
-            query: (parent: IUser) => getQueryObject('/update', parent)
+            query: (parent: IUser) => {
+                const newParent = {
+                    id: parent.id,
+                    item: {
+                        ...parent
+                    }
+                };
+                delete newParent.item.id;
+                return getQueryObject('/update', newParent);
+            }
         }),
         removeParent: build.mutation<void, number>({
             query: (id: number) => getQueryObject('/remove', id)

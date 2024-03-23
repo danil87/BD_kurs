@@ -1,14 +1,23 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import lessonApi from "../../services/LessonService";
 import childApi from "../../services/ChildService";
 import './RecordCard.css';
 import { ContextFormRecord } from "../../context";
+import { useAppSelector } from "../../hooks/redux";
 
 const RecordCard = () => {
-    const { data: lessons } = lessonApi.useFetchAllLessonQuery();
-    const { data: children } = childApi.useFetchAllChildQuery([1]);
+    const { user } = useAppSelector(state => state.auth);
+    const [getLessons, { data: lessons }] = lessonApi.useFetchAllLessonMutation();
+    const [getChildren, { data: children }] = childApi.useFetchAllChildMutation();
     const { newRecord, changeLesson, changeChild } = useContext(ContextFormRecord);
+
+    useEffect(() => {
+        if (user?.id) {
+            getChildren([user.id]);
+            getLessons();
+        }
+    }, [user]);
 
     return (
         <>

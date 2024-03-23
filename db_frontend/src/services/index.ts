@@ -11,7 +11,7 @@ export const createBaseQuery = (baseUrl: string) => {
                 user
             }
             } = getState() as RootState;
-
+            console.log(user, 'fetch');
             if (user?.token) headers.set('Authorization', `Bearer ${user?.token}`);
         }
 

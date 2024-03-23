@@ -1,11 +1,17 @@
+import { useEffect } from 'react';
 import lessonApi from '../../services/LessonService';
 import TableGrid from '../../components/TableGrid/TableGrid';
 import { lessonHeader } from '../../headers';
 import './ClassSchedule.css';
+import { useAppSelector } from '../../hooks/redux';
 
 function ClassSchedule() {
-  const { data: lessons, isLoading } = lessonApi.useFetchAllLessonQuery();
+  const { user } = useAppSelector(state => state.auth);
+  const [getLessons, { data: lessons, isLoading }] = lessonApi.useFetchAllLessonMutation();
 
+  useEffect(() => {
+    if (user) getLessons();
+  }, [user]);
 
   return (
     <div className='ClassSchedule'>

@@ -62,6 +62,7 @@ function Header() {
             </Box>
             <Box sx={{ flexGrow: 1, color: 'white', display: { xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>
               {pages.map((page) => (
+                (page.title !== 'расписание' || user) &&
                 <Link key={page.title} to={page.path} style={{ textDecoration: 'none' }}>
                   <Button
                     sx={{

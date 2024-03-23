@@ -48,6 +48,10 @@ export const childHeader: GridColDef[] = [
 ];
 
 export const recordHeader: GridColDef[] = [
-  { field: 'lessonDate', headerName: 'Дата', headerAlign: 'center', align: 'center' },
-  { field: 'childName', headerName: 'Имя ребёнка', headerAlign: 'center', align: 'center' },
+  { field: 'lessonName', headerName: 'Заняти', headerAlign: 'center', align: 'center', width: 150 },
+  { field: 'childName', headerName: 'Имя ребёнка', headerAlign: 'center', align: 'center', width: 150 },
+  {
+    field: 'lessonDate', headerName: 'Дата', headerAlign: 'center', align: 'center', width: 200,
+    valueGetter: (params: GridValueGetterParams) => new Date(params.value).toLocaleString()
+  }
 ];

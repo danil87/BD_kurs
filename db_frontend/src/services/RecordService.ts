@@ -6,7 +6,7 @@ const recordApi = createApi({
     reducerPath: 'RecordApi',
     baseQuery: createBaseQuery('http://localhost/record'),
     endpoints: (build) => ({
-        fetchAllRecord: build.query<IRecord[], number[]>({
+        fetchAllRecord: build.mutation<IRecord[], number[]>({
             query: (ids?: number[]) => getQueryObject('/list', {
                 filter: {
                     parentIds: ids

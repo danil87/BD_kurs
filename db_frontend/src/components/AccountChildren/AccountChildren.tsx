@@ -4,22 +4,17 @@ import { childHeader } from "../../headers";
 import childApi from "../../services/ChildService";
 import TableGrid from "../TableGrid/TableGrid";
 import './AccountChildren.css';
+import { useAppSelector } from "../../hooks/redux";
 
 const AccountChildren = () => {
-    const { data: children, isLoading } = childApi.useFetchAllChildQuery([1]);
-    const [createChild] = childApi.useCreateNewChildMutation();
+    const { user } = useAppSelector(state => state.auth);
+    const [getChildren, { data: children, isLoading }] = childApi.useFetchAllChildMutation();
 
     useEffect(() => {
-        createChild({
-            name: "string",
-            email: "string",
-            phoneNumber: "string",
-            address: "string",
-            age: 0,
-            gender: "string",
-            parentId: 0
-        });
-    }, []);
+        if (user?.id) {
+            getChildren([user.id]);
+        }
+    }, [user]);
 
     return (
         <Box className='AccountChildren'>

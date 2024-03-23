@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import {
   Box,
   ThemeProvider
@@ -34,11 +34,13 @@ const App = () => {
   useEffect(() => {
     if (isSuccess) {
       const userInStorage = localStorage.getItem('user');
+
       if (userInStorage) dispatch(login(JSON.parse(userInStorage) as IUser));
     }
     else if (isError) {
       localStorage.removeItem('user');
       dispatch(logout());
+
       navigate('/');
     }
   }, [isError, isSuccess]);
@@ -50,9 +52,9 @@ const App = () => {
         <Box sx={{ marginTop: '82px' }}>
           <Routes>
             <Route path='/' element={<Main />} />
-            <Route path='/schedule' element={<ClassSchedule />} />
+            <Route path='/schedule' element={user || localStorage.getItem('user') ? <ClassSchedule /> : <Navigate replace to={'/'} />} />
             <Route path='/reviews' element={<UsersReviews />} />
-            <Route path='/cabinet/*' element={<PersonalAccount />} />
+            <Route path='/cabinet/*' element={user || localStorage.getItem('user') ? <PersonalAccount /> : <Navigate replace to={'/'} />} />
           </Routes>
         </Box>
         <Footer />

@@ -1,23 +1,19 @@
 import {
-  Button, Avatar, Typography, Box, MenuItem, ThemeProvider, Menu,
+  Button, Typography, Box, MenuItem, ThemeProvider, Menu,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import './UserMenu.css';
 import { secondaryTheme } from '../../theme';
+import { logout } from '../../store/reducers/authSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-const user = {
-  login: "User's login",
-  avatar: '',
-};
 
-type Props = {
-  logOut: () => void
-}
-
-function UserMenu({ logOut }: Props) {
-  const navigate = useNavigate();
+function UserMenu() {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const { user } = useAppSelector(state => state.auth);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   function openMenu(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     event.preventDefault();
@@ -32,13 +28,19 @@ function UserMenu({ logOut }: Props) {
     navigate('/cabinet');
   }
 
+  const resetsUser = () => {
+    localStorage.removeItem('user');
+    dispatch(logout());
+    navigate('/');
+  };
+
   return (
     <Box>
       <Button color='secondary'
         sx={{ my: 1 }}
         onClick={openMenu}>
-        <Typography variant="spanBlock">{user.login}</Typography>
-        <Avatar sx={{ marginLeft: '20px' }} src={user.avatar} />
+        <Typography variant="spanBlock">{user?.name}</Typography>
+        {/* <Avatar sx={{ marginLeft: '20px' }} src={user.avatar} /> */}
       </Button>
       <Menu
         className='UserMenu_popper'
@@ -54,7 +56,7 @@ function UserMenu({ logOut }: Props) {
           <MenuItem onClick={redirectToCabinet}>
             <Typography color='primary' textAlign="center">Профиль</Typography>
           </MenuItem>
-          <MenuItem onClick={logOut}>
+          <MenuItem onClick={resetsUser}>
             <Typography color='primary' textAlign="center">Выйти</Typography>
           </MenuItem>
         </ThemeProvider>

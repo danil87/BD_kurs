@@ -5,6 +5,7 @@ import { createBaseQuery, getQueryObject } from ".";
 const childApi = createApi({
     reducerPath: 'ChildApi',
     baseQuery: createBaseQuery('http://localhost/child'),
+    tagTypes: ['Children'],
     endpoints: (build) => ({
         fetchAllChild: build.query<IChild[], number[]>({
             query: (ids: number[]) => getQueryObject('/list', {
@@ -13,19 +14,23 @@ const childApi = createApi({
                 },
                 navigation: {}
             }
-            )
+            ),
+            providesTags: result => ['Children']
         }),
         fetchOneChild: build.query<IChild, number>({
             query: (id: number) => getQueryObject('/get', id)
         }),
         createNewChild: build.mutation<void, IChild>({
-            query: (newChild: IChild) => getQueryObject('/create', newChild)
+            query: (newChild: IChild) => getQueryObject('/create', newChild),
+            invalidatesTags: ['Children']
         }),
         updateChild: build.mutation<void, IChild>({
-            query: (child: IChild) => getQueryObject('/update', child)
+            query: (child: IChild) => getQueryObject('/update', child),
+            invalidatesTags: ['Children']
         }),
         removeChild: build.mutation<void, number>({
-            query: (id: number) => getQueryObject('/remove', id)
+            query: (id: number) => getQueryObject('/remove', id),
+            invalidatesTags: ['Children']
         })
     })
 });

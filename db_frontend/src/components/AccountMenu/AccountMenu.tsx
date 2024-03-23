@@ -7,15 +7,15 @@ import './AccountMenu.css';
 const menuItem = [
     {
         title: 'Общие',
-        path: '/cabinet/'
+        path: '/cabinet'
     },
     {
         title: 'Дети',
-        path: '/cabinet/child'
+        path: 'child'
     },
     {
         title: 'Записи',
-        path: '/cabinet/record'
+        path: 'record'
     }
 ];
 

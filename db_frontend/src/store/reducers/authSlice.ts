@@ -1,26 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IUser } from "../../models/IParent";
 
-type User = {
-    user: any,
-    token: string | null;
+type AuthState = {
+    user: IUser | null,
 }
 
-const initialState: User = {
-    user: {},
-    token: null
+const initialState: AuthState = {
+    user: null
 };
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        login(state, action: PayloadAction<User>) {
-            state.user = action.payload.user;
-            state.token = action.payload.token;
+        login(state, action: PayloadAction<IUser>) {
+            state.user = action.payload;
         },
         logout(state) {
             state.user = initialState.user;
-            state.token = initialState.token;
         }
     }
 });

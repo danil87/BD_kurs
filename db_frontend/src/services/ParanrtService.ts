@@ -1,22 +1,22 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { IParent } from "../models/IParent";
+import { IUser } from "../models/IParent";
 import { getQueryObject, createBaseQuery } from ".";
 
 const parentApi = createApi({
     reducerPath: 'ParentApi',
     baseQuery: createBaseQuery('http://localhost/parent'),
     endpoints: (build) => ({
-        fetchAllParent: build.query<IParent[], void>({
+        fetchAllParent: build.query<IUser[], void>({
             query: () => getQueryObject('/list')
         }),
-        fetchOneParent: build.query<IParent, number>({
+        fetchOneParent: build.query<IUser, number>({
             query: (id: number) => getQueryObject('/get', id)
         }),
-        createNewParent: build.mutation<void, IParent>({
-            query: (newParent: IParent) => getQueryObject('/create', newParent)
+        createNewParent: build.mutation<void, IUser>({
+            query: (newParent: IUser) => getQueryObject('/create', newParent)
         }),
-        updateParent: build.mutation<void, IParent>({
-            query: (parent: IParent) => getQueryObject('/update', parent)
+        updateParent: build.mutation<void, IUser>({
+            query: (parent: IUser) => getQueryObject('/update', parent)
         }),
         removeParent: build.mutation<void, number>({
             query: (id: number) => getQueryObject('/remove', id)

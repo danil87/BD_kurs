@@ -7,5 +7,5 @@ export interface IChild {
     age: number,
     gender: string,
     parentId: number,
-    parentName: string
+    parentName?: string
 }

@@ -1,9 +1,13 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { ILesson } from "../../models/ILesson";
 import { IStaff } from "../../models/IStaff";
+import { IChild } from "../../models/IChild";
+import { IRecord } from "../../models/IRecord";
+
+type rowType = ILesson[] | IStaff[] | IChild[] | IRecord[] | undefined;
 
 type Props = {
-    row: ILesson[] | IStaff[] | undefined;
+    row: rowType;
     tableHeader: GridColDef[];
     isLoading: boolean;
 }

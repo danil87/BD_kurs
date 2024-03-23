@@ -14,7 +14,7 @@ interface ExtendedTypographyOptions extends TypographyOptions {
 export const mainTheme = createTheme({
     typography: {
         spanBlock: {
-            display: 'inline',
+            display: 'inline'
         },
     } as ExtendedTypographyOptions,
     palette: {

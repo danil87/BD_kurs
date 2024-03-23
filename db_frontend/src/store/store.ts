@@ -5,6 +5,8 @@ import lessonApi from "../services/LessonService";
 import childApi from "../services/ChildService";
 import parentApi from "../services/ParanrtService";
 import recordApi from "../services/RecordService";
+import authApi from "../services/AuthService";
+import checkAuthApi from "../services/CheckAuthService";
 
 export const setupStore = () => configureStore({
     reducer: rootReducer,
@@ -15,6 +17,8 @@ export const setupStore = () => configureStore({
             .concat(childApi.middleware)
             .concat(parentApi.middleware)
             .concat(recordApi.middleware)
+            .concat(authApi.middleware)
+            .concat(checkAuthApi.middleware)
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

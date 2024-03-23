@@ -28,7 +28,7 @@ export const lessonHeader: GridColDef[] = [
     headerAlign: 'center',
     align: 'center',
     renderCell: (params: GridRenderCellParams) => (
-      <ButtonTable lessonId={params.row.id} lessonName={params.row.name} />
+      <ButtonTable idLesson={params.row.id} lessonName={params.row.name} />
     ),
   },
 ];
@@ -36,4 +36,18 @@ export const lessonHeader: GridColDef[] = [
 export const staffHeader: GridColDef[] = [
   { field: 'postion', headerName: 'Должность' },
   { field: 'salary', headerName: 'Зарплата' }
+];
+
+export const childHeader: GridColDef[] = [
+  { field: 'name', headerName: 'Имя', headerAlign: 'center', align: 'center' },
+  { field: 'email', headerName: 'email', headerAlign: 'center', align: 'center' },
+  { field: 'phoneNumber', headerName: 'Телефон', headerAlign: 'center', align: 'center' },
+  { field: 'address', headerName: 'Адрес', headerAlign: 'center', align: 'center' },
+  { field: 'age', headerName: 'Возраст', headerAlign: 'center', align: 'center' },
+  { field: 'gender', headerName: 'Gender', headerAlign: 'center', align: 'center' },
+];
+
+export const recordHeader: GridColDef[] = [
+  { field: 'lessonDate', headerName: 'Дата', headerAlign: 'center', align: 'center' },
+  { field: 'childName', headerName: 'Имя ребёнка', headerAlign: 'center', align: 'center' },
 ];

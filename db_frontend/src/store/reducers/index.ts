@@ -5,6 +5,8 @@ import childApi from "../../services/ChildService";
 import parentApi from "../../services/ParanrtService";
 import recordApi from "../../services/RecordService";
 import { authSlice } from "./authSlice";
+import authApi from "../../services/AuthService";
+import checkAuthApi from "../../services/CheckAuthService";
 
 export const rootReducer = combineReducers({
     [staffApi.reducerPath]: staffApi.reducer,
@@ -12,6 +14,8 @@ export const rootReducer = combineReducers({
     [childApi.reducerPath]: childApi.reducer,
     [parentApi.reducerPath]: parentApi.reducer,
     [recordApi.reducerPath]: recordApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
+    [checkAuthApi.reducerPath]: checkAuthApi.reducer,
     auth: authSlice.reducer
 });
 

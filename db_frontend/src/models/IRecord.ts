@@ -7,3 +7,11 @@ export interface IRecord {
     childName?: string,
     parentName?: string
 }
+
+export interface Record {
+    childName: string;
+    lessonName: string;
+    childId: number | null;
+    lessonId: number | null;
+    parentId: number;
+}

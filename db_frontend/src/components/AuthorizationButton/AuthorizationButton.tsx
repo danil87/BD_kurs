@@ -2,9 +2,10 @@ import { Box, Button } from '@mui/material';
 
 type Props = {
 	color: string;
+	openLogin: () => void;
 }
 
-function AuthorizationButton({ color }: Props) {
+function AuthorizationButton({ color, openLogin }: Props) {
 	return (
 		<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 			<Button
@@ -16,6 +17,7 @@ function AuthorizationButton({ color }: Props) {
 				Зарегистрироваться
 			</Button >
 			<Button
+				onClick={openLogin}
 				color='secondary'
 				sx={{ my: 2, display: 'block', color }}
 				variant="contained"

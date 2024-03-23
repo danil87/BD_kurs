@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { TextField, ThemeProvider } from "@mui/material";
+import { Button, TextField, ThemeProvider } from "@mui/material";
 import { Box } from "@mui/system";
 import './AccountInfo.css';
 import { secondaryTheme } from "../../theme";
@@ -15,25 +15,24 @@ const AccountInfo = () => {
     const userKeys = Object.keys(testuser);
 
     return (
-        <Box className="AccountInfo">
-            <Box className="AccountInfo__img">
-                <img className="AccountInfo__img__img" alt="" src="https://www.no5.com/media/1772/place-holder-image.png" />
+        <ThemeProvider theme={secondaryTheme}>
+            <Box className="AccountInfo">
+                {userKeys.map(key => (
+                    <Box key={key}
+                        sx={{ margin: '10px' }}>
+                        <TextField
+                            color="primary"
+                            label={key}
+                            variant="outlined"
+                            value={testuser[key as keyof (typeof testuser)]} />
+                    </Box>
+                ))}
+                <Button
+                    sx={{ alignSelf: 'flex-end' }}>
+                    Сохранить
+                </Button>
             </Box>
-            <Box className="AccountInfo__info">
-                <ThemeProvider theme={secondaryTheme}>
-                    {userKeys.map(key => (
-                        <Box key={key}
-                            sx={{ margin: '20px' }}>
-                            <TextField
-                                color="primary"
-                                label={key}
-                                variant="outlined"
-                                value={testuser[key as keyof (typeof testuser)]} />
-                        </Box>
-                    ))}
-                </ThemeProvider>
-            </Box>
-        </Box>
+        </ThemeProvider>
     );
 };
 

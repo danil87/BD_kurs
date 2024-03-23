@@ -5,12 +5,20 @@ import ModalCard from "../ModalCard/ModalCard";
 import { ILesson } from "../../models/ILesson";
 import { IChild } from "../../models/IChild";
 import recordApi from "../../services/RecordService";
-import { ContextFormRecord, initStateRecord } from "../../context";
+import { Record } from "../../models/IRecord";
 
 type Props = {
     idLesson: number,
     lessonName: string;
 }
+
+const initStateRecord: Record = {
+    childName: '',
+    lessonName: '',
+    childId: null,
+    lessonId: null,
+    parentId: 1
+};
 
 const ButtonTable = ({ idLesson, lessonName }: Props) => {
     const [open, setOpen] = useState<boolean>(false);
@@ -57,19 +65,17 @@ const ButtonTable = ({ idLesson, lessonName }: Props) => {
                 Записаться
             </Button>
             {open &&
-                <ContextFormRecord.Provider value={{ newRecord, changeLesson, changeChild }}>
-                    <ModalCard
-                        title='Выберите занятие и ребёнка для записи'
-                        titleButton='Записаться'
-                        open={open}
-                        close={() => { setOpen(false); }}
-                        isSuccess={isSuccess}
-                        isError={isError}
-                        submit={submit}
-                    >
-                        <RecordCard />
-                    </ModalCard>
-                </ContextFormRecord.Provider>
+                <ModalCard
+                    title='Выберите занятие и ребёнка для записи'
+                    titleButton='Записаться'
+                    open={open}
+                    close={() => { setOpen(false); }}
+                    isSuccess={isSuccess}
+                    isError={isError}
+                    submit={submit}
+                >
+                    <RecordCard newRecord={newRecord} changeLesson={changeLesson} changeChild={changeChild} />
+                </ModalCard>
             }
         </>
     );

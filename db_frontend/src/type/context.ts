@@ -5,12 +5,16 @@ import { Record } from "../models/IRecord";
 
 export type ContextRecord = {
     newRecord: Record,
-    changeLesson: (lesson: ILesson) => void;
-    changeChild: (child: IChild) => void
+    changeLesson: (_: ILesson) => void;
+    changeChild: (_: IChild) => void
 }
 
 export type ContextLogin = {
     userForLogin: User,
-    changeUser: (key: string, value: string) => void;
+    changeUser: (_: string, __: string) => void;
 }
 
+export type ContextChild = {
+    newChild: IChild,
+    changeChild: (_: string, __: string) => void,
+}

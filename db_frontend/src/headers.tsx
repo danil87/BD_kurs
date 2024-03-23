@@ -44,7 +44,7 @@ export const childHeader: GridColDef[] = [
   { field: 'phoneNumber', headerName: 'Телефон', headerAlign: 'center', align: 'center' },
   { field: 'address', headerName: 'Адрес', headerAlign: 'center', align: 'center' },
   { field: 'age', headerName: 'Возраст', headerAlign: 'center', align: 'center' },
-  { field: 'gender', headerName: 'Gender', headerAlign: 'center', align: 'center' },
+  { field: 'gender', headerName: 'Пол', headerAlign: 'center', align: 'center' },
 ];
 
 export const recordHeader: GridColDef[] = [

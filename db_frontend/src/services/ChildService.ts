@@ -22,7 +22,16 @@ const childApi = createApi({
             query: (newChild: IChild) => getQueryObject('/create', newChild),
         }),
         updateChild: build.mutation<void, IChild>({
-            query: (child: IChild) => getQueryObject('/update', child),
+            query: (child: IChild) => {
+                const newChild = {
+                    id: child.id,
+                    item: {
+                        ...child
+                    }
+                };
+                delete newChild.item.id;
+                return getQueryObject('/update', newChild);
+            },
         }),
         removeChild: build.mutation<void, number>({
             query: (id: number) => getQueryObject('/remove', id),

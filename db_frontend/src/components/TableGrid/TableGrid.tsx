@@ -10,9 +10,10 @@ type Props = {
     row: rowType;
     tableHeader: GridColDef[];
     isLoading: boolean;
+    openEditCard?: (row: IChild) => void;
 }
 
-const TableGrid = ({ row, tableHeader, isLoading }: Props) => (
+const TableGrid = ({ row, tableHeader, isLoading, openEditCard }: Props) => (
     <DataGrid
         rows={row || []}
         columns={tableHeader}
@@ -29,6 +30,10 @@ const TableGrid = ({ row, tableHeader, isLoading }: Props) => (
                 outline: "none",
             },
         }}
+        onRowClick={(e) => {
+            if (openEditCard) openEditCard(e.row);
+        }
+        }
     />
 );
 

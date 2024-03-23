@@ -1,6 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import { Alert, Box, Button, Card, CardActions, CardContent, Modal, Typography } from "@mui/material";
 import { secondaryTheme } from "../../theme";
+import './ModalCard.css';
 
 interface Props {
     title: string;
@@ -18,7 +19,7 @@ const ModalCard = ({ title, titleButton, open, close, isSuccess, isError, submit
         <Modal
             open={open}
             onClose={close}
-            sx={{ width: '40%', margin: '0 auto', top: '30%' }}
+            sx={{ width: '40%', margin: '0 auto', top: '10%' }}
         >
             <Card>
                 <CardContent>
@@ -41,7 +42,7 @@ const ModalCard = ({ title, titleButton, open, close, isSuccess, isError, submit
                             {title}
                         </Typography>
                     </Box>
-                    <Box className="RecordCard__form">
+                    <Box className="ModalCard__form">
                         {children}
                     </Box>
                 </CardContent>

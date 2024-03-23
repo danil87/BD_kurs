@@ -2,7 +2,7 @@ import { useState } from 'react';
 import AuthorizationButton from '../AuthorizationButton/AuthorizationButton';
 import LoginFrom from '../LoginForm/LoginForm';
 import './MainImg.css';
-import { ContextFormLogin, initStateLogin } from '../../context';
+import initStateLogin from '../../context';
 import ModalCard from '../ModalCard/ModalCard';
 import authApi from '../../services/AuthService';
 
@@ -34,17 +34,15 @@ function MainImg() {
       <div className='circle red' />
       <div className='circle green' />
       <div className='circle yellow' />
-      <ContextFormLogin.Provider value={{ userForLogin, changeUser }}>
-        <ModalCard
-          title='Вход'
-          titleButton='Войти'
-          isSuccess={isSuccess}
-          isError={isError}
-          submit={submit}
-          open={openLogin} close={() => setOpenLogin(false)}>
-          <LoginFrom />
-        </ModalCard>
-      </ContextFormLogin.Provider>
+      <ModalCard
+        title='Вход'
+        titleButton='Войти'
+        isSuccess={isSuccess}
+        isError={isError}
+        submit={submit}
+        open={openLogin} close={() => setOpenLogin(false)}>
+        <LoginFrom userForLogin={userForLogin} changeUser={changeUser} />
+      </ModalCard>
     </div>
   );
 }

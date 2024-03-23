@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Icon from '@mui/material/Icon';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ThemeProvider } from '@mui/material';
 import AuthorizationButton from '../AuthorizationButton/AuthorizationButton';
 import './Header.css';
@@ -14,7 +14,7 @@ import { secondaryTheme } from '../../theme';
 import LoginFrom from '../LoginForm/LoginForm';
 import ModalCard from '../ModalCard/ModalCard';
 import authApi from '../../services/AuthService';
-import { ContextFormLogin, initStateLogin } from '../../context';
+import initStateLogin from '../../context';
 import { useAppSelector } from '../../hooks/redux';
 
 const pages = [
@@ -45,6 +45,10 @@ function Header() {
   const submit = () => {
     login(userForLogin);
   };
+
+  useEffect(() => {
+    if (isSuccess) setUser(initStateLogin);
+  }, [isSuccess]);
 
   return (
     <>
@@ -83,17 +87,15 @@ function Header() {
           </Toolbar>
         </Container>
       </AppBar>
-      <ContextFormLogin.Provider value={{ userForLogin, changeUser }}>
-        <ModalCard
-          title='Вход'
-          titleButton='Войти'
-          isSuccess={isSuccess}
-          isError={isError}
-          submit={submit}
-          open={openLogin} close={() => setOpenLogin(false)}>
-          <LoginFrom />
-        </ModalCard>
-      </ContextFormLogin.Provider>
+      <ModalCard
+        title='Вход'
+        titleButton='Войти'
+        isSuccess={isSuccess}
+        isError={isError}
+        submit={submit}
+        open={openLogin} close={() => setOpenLogin(false)}>
+        <LoginFrom userForLogin={userForLogin} changeUser={changeUser} />
+      </ModalCard>
     </>
   );
 }

@@ -1,12 +1,16 @@
 import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from "@mui/material";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { ContextFormLogin } from "../../context";
+import { User } from "../../models/IParent";
 
-const LoginFrom = () => {
+type Props = {
+    userForLogin: User,
+    changeUser: (key: string, value: string) => void
+}
+
+const LoginFrom = ({ userForLogin, changeUser }: Props) => {
     const [showPassword, setShowPassword] = useState(false);
-    const { userForLogin, changeUser } = useContext(ContextFormLogin);
 
     return (
         <>

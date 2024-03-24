@@ -1,16 +1,28 @@
 import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { User } from "../../models/IParent";
+import { IUser } from "../../models/IParent";
 
 type Props = {
-    userForLogin: User,
-    changeUser: (key: string, value: string) => void
+    user: IUser,
+    setUser: (user: IUser) => void;
+    isUpdateUser: boolean;
+    setIsUpdateUser: () => void;
 }
 
-const LoginFrom = ({ userForLogin, changeUser }: Props) => {
+const LoginFrom = ({ user, setUser, isUpdateUser, setIsUpdateUser }: Props) => {
+    const [newUser, setNewUser] = useState(user);
     const [showPassword, setShowPassword] = useState(false);
+
+    const changeUser = (key: string, value: string) => {
+        setNewUser({ ...newUser, [key]: value });
+    };
+
+    useEffect(() => {
+        if (isUpdateUser && newUser !== user) setUser(newUser);
+        else setIsUpdateUser();
+    }, [isUpdateUser]);
 
     return (
         <>
@@ -18,14 +30,14 @@ const LoginFrom = ({ userForLogin, changeUser }: Props) => {
                 label="Логин"
                 variant="outlined"
                 color="info"
-                value={userForLogin.username}
+                value={newUser.username}
                 onChange={(event) => changeUser('username', event.target.value)}
             />
             <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined" color="info">
                 <InputLabel color="info">Пароль</InputLabel>
                 <OutlinedInput
                     type={showPassword ? 'text' : 'password'}
-                    value={userForLogin.password}
+                    value={newUser.password}
                     onChange={(event) => changeUser('password', event.target.value)}
                     endAdornment={
                         <InputAdornment position="end">

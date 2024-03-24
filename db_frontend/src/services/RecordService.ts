@@ -11,7 +11,7 @@ const recordApi = createApi({
                 filter: {
                     parentIds: ids
                 }, navigation: {}
-            })
+            }),
         }),
         fetchOneRecord: build.query<IRecord, number>({
             query: (id: number) => getQueryObject('/get', id)
@@ -20,7 +20,17 @@ const recordApi = createApi({
             query: (newRecord: IRecord) => getQueryObject('/create', newRecord)
         }),
         updateRecord: build.mutation<void, IRecord>({
-            query: (record: IRecord) => getQueryObject('/update', record)
+            query: (record: IRecord) => {
+                const newRecord = {
+                    id: record.id,
+                    item: {
+                        ...record
+                    }
+                };
+
+                delete newRecord.item.id;
+                return getQueryObject('/update', newRecord);
+            }
         }),
         removeRecord: build.mutation<void, number>({
             query: (id: number) => getQueryObject('/remove', id)

@@ -24,7 +24,10 @@ const AccountChildren = () => {
     const [newChild, setNewChild] = useState<IChild>(initStateChild);
     const [openNewChildCard, setOpenNewChildCard] = useState<boolean>(false);
     const [openEditChildCard, setOpenEditChildCard] = useState<boolean>(false);
-    const [getChildren, { data: children, isLoading }] = childApi.useFetchAllChildMutation();
+    const [isUpdateChild, setIsUpdateChild] = useState<boolean>(false);
+    const [getChildren, { data: children, isLoading }] = childApi.useFetchAllChildMutation({
+        fixedCacheKey: 'child'
+    });
     const [createChild, { isSuccess: isSuccessCreate, isError: isErrorCreate }] = childApi.useCreateNewChildMutation();
     const [updateChild, { isSuccess: isSuccessUpdate, isError: isErrorUdpate }] = childApi.useUpdateChildMutation();
 
@@ -36,7 +39,10 @@ const AccountChildren = () => {
 
     const closeCard = () => {
         if (openNewChildCard) setOpenNewChildCard(false);
-        if (openEditChildCard) setOpenEditChildCard(false);
+        if (openEditChildCard) {
+            setOpenEditChildCard(false);
+            setNewChild(initStateChild);
+        }
     };
 
     const returnTitle = (): string => {
@@ -44,24 +50,12 @@ const AccountChildren = () => {
         return 'Изменение данных ребёнка';
     };
 
-    const changeChild = (key: string, value: string) => {
-        let newValue: string | number = value;
+    const submit = () => setIsUpdateChild(true);
 
-        if (typeof initStateChild[key as keyof IChild] === 'number') {
-            newValue = parseInt(value, 10);
-            newValue = Number.isNaN(newValue) ? '' : newValue;
-        }
-
-        setNewChild({
-            ...newChild,
-            [key]: newValue
-        });
-    };
-
-    const submit = () => {
+    const sendData = async () => {
         if (user?.id) {
             if (openNewChildCard) {
-                createChild({
+                await createChild({
                     ...newChild,
                     parentId: user.id
                 });
@@ -69,9 +63,8 @@ const AccountChildren = () => {
 
             }
             if (openEditChildCard) {
-                updateChild(newChild);
+                await updateChild(newChild);
             }
-
             getChildren([user.id]);
         }
     };
@@ -82,13 +75,23 @@ const AccountChildren = () => {
         }
     }, [user]);
 
+    useEffect(() => {
+        if (isUpdateChild) {
+            sendData();
+            setIsUpdateChild(false);
+        }
+    }, [newChild]);
+
     return (
         <Box className='AccountChildren'>
             <TableGrid row={children} isLoading={isLoading} tableHeader={childHeader} openEditCard={openEditCard} />
             <Button
                 sx={{ alignSelf: 'flex-end' }}
                 onClick={() => setOpenNewChildCard(true)}
-            >Добавить ребёнка</Button>
+            >
+                Добавить ребёнка
+            </Button>
+
             <ModalCard
                 title={returnTitle()}
                 titleButton="Сохранить"
@@ -97,8 +100,11 @@ const AccountChildren = () => {
                 isSuccess={isSuccessCreate || isSuccessUpdate}
                 isError={isErrorCreate || isErrorUdpate}
                 submit={submit}
+                formStyle={{ display: 'grid' }}
+                successAlertText="Данные успешно сохранены!"
             >
-                <ChildForm child={newChild} changeChild={changeChild} />
+                <ChildForm child={newChild} setChild={setNewChild}
+                    isUpdateChild={isUpdateChild} setIsUpdateChild={() => { setIsUpdateChild(false); }} />
             </ModalCard>
         </Box>
     );

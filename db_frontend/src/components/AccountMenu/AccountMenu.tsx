@@ -2,6 +2,7 @@ import { Drawer, List, ListItem, ListItemButton, ListItemText, Toolbar } from "@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../hooks/redux";
 import './AccountMenu.css';
 
 const menuItem = [
@@ -16,11 +17,16 @@ const menuItem = [
     {
         title: 'Записи',
         path: 'record'
+    },
+    {
+        title: 'Сотрудники',
+        path: 'staff'
     }
 ];
 
 const AccountMenu = () => {
-    const drawerWidth = 240;
+    const { user } = useAppSelector(state => state.auth);
+
     return (
         <Box className="AccountMenu">
             <Drawer
@@ -29,7 +35,7 @@ const AccountMenu = () => {
                     display: { xs: "none", sm: "block" },
                     "& .MuiDrawer-paper": {
                         boxSizing: "border-box",
-                        width: drawerWidth,
+                        width: 240,
                         position: 'static'
                     },
                 }}
@@ -39,6 +45,7 @@ const AccountMenu = () => {
                     <Toolbar />
                     <List>
                         {menuItem.map((item, index) => (
+                            (item.title !== 'Сотрудники' || user?.is_superuser) &&
                             <Link key={index} to={item.path} style={{ textDecoration: 'none' }}>
                                 <ListItem disablePadding>
                                     <ListItemButton>

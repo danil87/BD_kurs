@@ -6,6 +6,7 @@ import { ILesson } from "../../models/ILesson";
 import { IChild } from "../../models/IChild";
 import recordApi from "../../services/RecordService";
 import { Record } from "../../models/IRecord";
+import { useAppSelector } from "../../hooks/redux";
 
 type Props = {
     idLesson: number,
@@ -17,10 +18,11 @@ const initStateRecord: Record = {
     lessonName: '',
     childId: null,
     lessonId: null,
-    parentId: 1
+    parentId: 0
 };
 
 const ButtonTable = ({ idLesson, lessonName }: Props) => {
+    const { user } = useAppSelector(state => state.auth);
     const [open, setOpen] = useState<boolean>(false);
     const [newRecord, setNewRecord] = useState(initStateRecord);
     const [createRecord, { isSuccess, isError }] = recordApi.useCreateNewRecordMutation();
@@ -52,8 +54,10 @@ const ButtonTable = ({ idLesson, lessonName }: Props) => {
     }, []);
 
     const submit = () => {
-        const { childId, lessonId, parentId } = newRecord;
-        createRecord({ childId, lessonId, parentId });
+        if (user?.id) {
+            const { childId, lessonId } = newRecord;
+            createRecord({ childId, lessonId, parentId: user?.id });
+        }
     };
     return (
         <>

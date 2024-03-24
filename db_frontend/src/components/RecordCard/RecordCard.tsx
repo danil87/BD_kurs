@@ -22,20 +22,21 @@ const RecordCard = ({ newRecord, changeLesson, changeChild }: Props) => {
     useEffect(() => {
         if (user?.id) {
             getChildren([user.id]);
-            getLessons();
+            getLessons([user.id]);
         }
     }, [user]);
 
     return (
         <>
-            <FormControl>
+            <FormControl
+                sx={{ width: '200px' }}
+            >
                 <InputLabel color="info">Занятие</InputLabel>
                 <Select
                     className="RecordCard__form__select"
                     color="info"
-                    value={newRecord?.lessonName}
+                    value={lessons ? newRecord?.lessonName : ''}
                     label="Занятие"
-                    sx={{ width: '200px' }}
                 >
                     {lessons?.map(lesson => (
                         <MenuItem
@@ -45,14 +46,15 @@ const RecordCard = ({ newRecord, changeLesson, changeChild }: Props) => {
                     ))}
                 </Select>
             </FormControl>
-            <FormControl>
+            <FormControl
+                sx={{ width: '200px' }}
+            >
                 <InputLabel color="info">Ребёнок</InputLabel>
                 <Select
                     className="RecordCard__form__select"
                     color="info"
-                    value={newRecord.childName}
+                    value={children ? newRecord.childName : ''}
                     label="ребёнок"
-                    sx={{ width: '200px' }}
                 >
                     {children?.map(child => (
                         <MenuItem

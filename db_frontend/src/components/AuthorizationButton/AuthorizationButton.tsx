@@ -3,9 +3,10 @@ import { Box, Button } from '@mui/material';
 type Props = {
 	color: string;
 	openLogin: () => void;
+	openRegister: () => void;
 }
 
-function AuthorizationButton({ color, openLogin }: Props) {
+function AuthorizationButton({ color, openLogin, openRegister }: Props) {
 	return (
 		<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 			<Button
@@ -13,6 +14,7 @@ function AuthorizationButton({ color, openLogin }: Props) {
 				sx={{
 					my: 2, display: 'block', marginLeft: '15px', marginRight: '20px',
 				}}
+				onClick={openRegister}
 			>
 				Зарегистрироваться
 			</Button >

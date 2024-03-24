@@ -6,8 +6,8 @@ const staffApi = createApi({
     reducerPath: 'staffApi',
     baseQuery: createBaseQuery('http://localhost/staff'),
     endpoints: (build) => ({
-        fetchAllStaff: build.query<IStaff[], void>({
-            query: () => getQueryObject('/list')
+        fetchAllStaff: build.mutation<IStaff[], number[]>({
+            query: (ids: number[]) => getQueryObject('/list')
         }),
         fetchOneStaff: build.query<IStaff, number>({
             query: (id: number) => getQueryObject('/get', id)

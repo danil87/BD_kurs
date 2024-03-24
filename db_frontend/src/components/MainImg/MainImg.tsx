@@ -7,6 +7,7 @@ import ModalCard from '../ModalCard/ModalCard';
 import authApi from '../../services/AuthService';
 
 function MainImg() {
+  // const { user } = useApp
   const [openLogin, setOpenLogin] = useState(false);
   const [userForLogin, setUser] = useState(initStateLogin);
   const [login, { isSuccess, isError }] = authApi.useLoginMutation();
@@ -29,12 +30,12 @@ function MainImg() {
           Текст раздела 1 Текст раздела 1 Текст раздела 1
           Текст раздела 1 Текст раздела 1 Текст раздела 1
         </p>
-        <AuthorizationButton color="#1d7cfb" openLogin={() => { setOpenLogin(true); }} />
+        {/* <AuthorizationButton color="#1d7cfb" openLogin={() => { setOpenLogin(true); }} /> */}
       </div>
       <div className='circle red' />
       <div className='circle green' />
       <div className='circle yellow' />
-      <ModalCard
+      {/* <ModalCard
         title='Вход'
         titleButton='Войти'
         isSuccess={isSuccess}
@@ -42,7 +43,7 @@ function MainImg() {
         submit={submit}
         open={openLogin} close={() => setOpenLogin(false)}>
         <LoginFrom userForLogin={userForLogin} changeUser={changeUser} />
-      </ModalCard>
+      </ModalCard> */}
     </div>
   );
 }

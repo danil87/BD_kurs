@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button, ThemeProvider } from '@mui/material';
 import lessonApi from '../../services/LessonService';
 import TableGrid from '../../components/TableGrid/TableGrid';
-import { lessonHeader } from '../../headers';
+import { lessonHeader, removeButton } from '../../headers';
 import { useAppSelector } from '../../hooks/redux';
 import './ClassSchedule.css';
 import { secondaryTheme } from '../../theme';
@@ -79,14 +79,20 @@ function ClassSchedule() {
   }, [user]);
 
   return (
-    <div className='ClassSchedule'>
-      <TableGrid row={lessons} isLoading={isLoading} tableHeader={lessonHeader} openEditCard={openEditCard} />
+    <div className='ClassSchedule' style={user?.is_superuser ? { width: '70%' } : {}}>
+      <TableGrid
+        row={lessons}
+        isLoading={isLoading}
+        tableHeader={user?.is_superuser ? [...lessonHeader, removeButton] : lessonHeader}
+        openEditCard={openEditCard} />
       <ThemeProvider theme={secondaryTheme}>
-        <Button
-          sx={{ alignSelf: 'flex-end', marginTop: '20px' }}
-          onClick={() => setOpenNewLessonCard(true)}>
-          Добавить занятие
-        </Button>
+        {user?.is_superuser &&
+          <Button
+            sx={{ alignSelf: 'flex-end', marginTop: '20px' }}
+            onClick={() => setOpenNewLessonCard(true)}>
+            Добавить занятие
+          </Button>
+        }
       </ThemeProvider>
       <ModalCard
         title={returnTitle()}

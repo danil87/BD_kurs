@@ -1,13 +1,11 @@
 import { GridColDef, GridRenderCellParams, GridValueGetterParams } from "@mui/x-data-grid";
 import ButtonTable from './components/ButtonTable/ButtonTable';
 import childApi from "./services/ChildService";
-import RemoveButton from "./components/RemoveChildButton/RemoveButton";
+import RemoveButton from "./components/RemoveButton/RemoveButton";
 import recordApi from "./services/RecordService";
 import staffApi from "./services/StaffService";
-import { IUser } from "./models/IParent";
 import lessonApi from "./services/LessonService";
-
-const user = JSON.parse(localStorage.getItem('user') || '{}') as IUser;
+import PaymentButton from "./components/PaymentButton/PaymentButton";
 
 export const lessonHeader: GridColDef[] = [
   {
@@ -30,31 +28,37 @@ export const lessonHeader: GridColDef[] = [
     field: 'price', headerName: 'Стоимость', width: 100, align: 'center', headerAlign: 'center',
   },
   {
-    field: user.is_superuser ? 'delete' : 'subscribe',
-    headerName: user.is_superuser ? 'Удалить' : 'Записаться',
+    field: 'subscribe',
+    headerName: 'Записаться',
     width: 200,
     headerAlign: 'center',
     align: 'center',
-    renderCell: (params: GridRenderCellParams) => {
-      const [deleteMethod] = lessonApi.useRemoveLessonMutation();
-      const [getMethod] = lessonApi.useFetchAllLessonMutation({
-        fixedCacheKey: 'lesson'
-      });
-
-      if (user.is_superuser) {
-        return (
-          <RemoveButton
-            row={params.row}
-            deleteMethod={deleteMethod}
-            getMethod={getMethod} />);
-      }
-
-      return (
-        <ButtonTable idLesson={params.row.id} lessonName={params.row.name} />
-      );
-    },
+    renderCell: (params: GridRenderCellParams) => (
+      <ButtonTable idLesson={params.row.id} lessonName={params.row.name} />
+    ),
   },
 ];
+
+export const removeButton: GridColDef = {
+  field: 'delete',
+  headerName: 'Удалить',
+  width: 200,
+  headerAlign: 'center',
+  align: 'center',
+  renderCell: (params: GridRenderCellParams) => {
+    const [deleteMethod] = lessonApi.useRemoveLessonMutation();
+    const [getMethod] = lessonApi.useFetchAllLessonMutation({
+      fixedCacheKey: 'lesson'
+    });
+
+    return (
+      <RemoveButton
+        row={params.row}
+        deleteMethod={deleteMethod}
+        getMethod={getMethod} />
+    );
+  },
+};
 
 export const staffHeader: GridColDef[] = [
   { field: 'position', headerName: 'Должность', width: 200, headerAlign: 'center', align: 'center' },
@@ -110,6 +114,12 @@ export const recordHeader: GridColDef[] = [
     valueGetter: (params: GridValueGetterParams) => new Date(params.value).toLocaleString()
   },
   {
+    field: 'payment', headerName: 'Оплата', headerAlign: 'center', align: 'center', width: 150,
+    renderCell: (params: GridRenderCellParams) => (
+      <PaymentButton record={params.row} />
+    ),
+  },
+  {
     field: 'delete', headerName: 'Удалить', headerAlign: 'center', align: 'center',
     renderCell: (params: GridRenderCellParams) => {
       const [deleteMethod] = recordApi.useRemoveRecordMutation();
@@ -125,4 +135,13 @@ export const recordHeader: GridColDef[] = [
       );
     },
   }
+];
+
+export const paymentHeader: GridColDef[] = [
+  {
+    field: 'lessonDate', headerName: 'Дата проведения', headerAlign: 'center', align: 'center', width: 200,
+    valueGetter: (params: GridValueGetterParams) => new Date(params.value).toLocaleString()
+  },
+  { field: 'method', headerName: 'Способ оплаты', headerAlign: 'center', align: 'center', width: 200 },
+  { field: 'amount', headerName: 'Цена', headerAlign: 'center', align: 'center', width: 100 }
 ];

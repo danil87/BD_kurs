@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import RecordCard from "../RecordCard/RecordCard";
 import ModalCard from "../ModalCard/ModalCard";
 import { ILesson } from "../../models/ILesson";
@@ -53,6 +53,11 @@ const ButtonTable = ({ idLesson, lessonName }: Props) => {
         }
     }, []);
 
+    const openCard = (event: React.MouseEvent) => {
+        event.stopPropagation();
+        setOpen(true);
+    };
+
     const submit = () => {
         if (user?.id) {
             const { childId, lessonId } = newRecord;
@@ -63,7 +68,7 @@ const ButtonTable = ({ idLesson, lessonName }: Props) => {
         <>
             <Button
                 color='success'
-                onClick={() => setOpen(true)}
+                onClick={openCard}
                 sx={{ my: 2 }}
             >
                 Записаться

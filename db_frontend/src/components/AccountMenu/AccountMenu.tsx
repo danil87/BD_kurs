@@ -19,6 +19,10 @@ const menuItem = [
         path: 'record'
     },
     {
+        title: 'Оплачено',
+        path: 'payment'
+    },
+    {
         title: 'Сотрудники',
         path: 'staff'
     }

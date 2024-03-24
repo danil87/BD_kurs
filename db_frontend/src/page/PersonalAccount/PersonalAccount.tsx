@@ -10,6 +10,7 @@ import { secondaryTheme } from '../../theme';
 import AccountStaff from '../../components/AccountStaff/AccountStaff';
 import { useAppSelector } from '../../hooks/redux';
 import './PersonalAccount.css';
+import AccountPayment from '../../components/AccountPayment/AccountPayment';
 
 const PersonalAccount = () => {
   const { user } = useAppSelector(state => state.auth);
@@ -22,6 +23,7 @@ const PersonalAccount = () => {
           <Route path='child' element={<AccountChildren />} />
           <Route path='record' element={<AccountRecord />} />
           <Route path='staff' element={user?.is_superuser ? <AccountStaff /> : <Navigate replace to='/' />} />
+          <Route path='payment' element={<AccountPayment />} />
         </Routes>
       </Box>
     </ThemeProvider>

@@ -60,6 +60,7 @@ function Header() {
 
   const returnButtonTitle = () => {
     if (openLogin) return 'Войти';
+    if (user?.is_superuser) return 'Зарегистрировать';
     return 'Зарегистриоваться';
   };
 
@@ -123,7 +124,7 @@ function Header() {
               ))}
               <ThemeProvider theme={secondaryTheme}>
                 {user
-                  ? <UserMenu />
+                  ? <UserMenu openRegister={() => { setOpenRegister(true); }} />
                   : <AuthorizationButton color="white" openLogin={() => { setOpenLogin(true); }} openRegister={() => { setOpenRegister(true); }} />
                 }
               </ThemeProvider>
@@ -144,7 +145,7 @@ function Header() {
         {openLogin ?
           <LoginFrom user={newUser} setUser={setUser} isUpdateUser={isUpdateUser} setIsUpdateUser={() => { setIsUpdateUser(false); }} />
           :
-          <RegisterForm user={newUser} setUser={setUser} isUpdateUser={isUpdateUser} setIsUpdateUser={() => { setIsUpdateUser(false); }} />
+          <RegisterForm oldUser={newUser} setUser={setUser} isUpdateUser={isUpdateUser} setIsUpdateUser={() => { setIsUpdateUser(false); }} />
         }
       </ModalCard>
     </>

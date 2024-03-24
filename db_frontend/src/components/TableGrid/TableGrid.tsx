@@ -3,8 +3,9 @@ import { ILesson } from "../../models/ILesson";
 import { IStaff } from "../../models/IStaff";
 import { IChild } from "../../models/IChild";
 import { IRecord } from "../../models/IRecord";
+import { IPayment } from "../../models/IPayment";
 
-type rowType = ILesson[] | IStaff[] | IChild[] | IRecord[] | undefined;
+type rowType = ILesson[] | IStaff[] | IChild[] | IRecord[] | IPayment[] | undefined;
 
 type Props = {
     row: rowType;

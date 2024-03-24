@@ -8,6 +8,7 @@ import recordApi from "../services/RecordService";
 import authApi from "../services/AuthService";
 import checkAuthApi from "../services/CheckAuthService";
 import updateLocalStorage from "./middlewares/updateLocalStorage";
+import paymentApi from "../services/PaymentService";
 
 export const setupStore = () => configureStore({
     reducer: rootReducer,
@@ -20,6 +21,7 @@ export const setupStore = () => configureStore({
             .concat(recordApi.middleware)
             .concat(authApi.middleware)
             .concat(checkAuthApi.middleware)
+            .concat(paymentApi.middleware)
             .concat(updateLocalStorage)
 });
 

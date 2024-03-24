@@ -14,8 +14,10 @@ import { secondaryTheme } from '../../theme';
 import LoginFrom from '../LoginForm/LoginForm';
 import ModalCard from '../ModalCard/ModalCard';
 import authApi from '../../services/AuthService';
-import initStateLogin from '../../context';
 import { useAppSelector } from '../../hooks/redux';
+import parentApi from '../../services/ParanrtService';
+import { IUser } from '../../models/IParent';
+import RegisterForm from '../RegisterForm/RegisterForm';
 
 const pages = [
   {
@@ -32,23 +34,65 @@ const pages = [
   },
 ];
 
+const initStateUser: IUser = {
+  name: '',
+  username: '',
+  password: '',
+  address: '',
+  email: '',
+  phoneNumber: '',
+};
+
 function Header() {
   const { user } = useAppSelector(state => state.auth);
   const [openLogin, setOpenLogin] = useState(false);
-  const [userForLogin, setUser] = useState(initStateLogin);
-  const [login, { isSuccess, isError }] = authApi.useLoginMutation();
+  const [openRegister, setOpenRegister] = useState(false);
+  const [newUser, setUser] = useState<IUser>(initStateUser);
+  const [isUpdateUser, setIsUpdateUser] = useState<boolean>(false);
+  const [login, { isSuccess: isSuccessLogin, isError: isErrorLogin }] = authApi.useLoginMutation();
+  const [register, { isSuccess: isSuccessRegister, isError: isErrorRegister }] = parentApi.useCreateNewParentMutation();
 
-  const changeUser = (key: string, value: string) => {
-    setUser({ ...userForLogin, [key]: value });
+
+  const returnTitle = () => {
+    if (openLogin) return 'Вход';
+    return 'Регистрация';
   };
 
-  const submit = () => {
-    login(userForLogin);
+  const returnButtonTitle = () => {
+    if (openLogin) return 'Войти';
+    return 'Зарегистриоваться';
+  };
+
+  const closeCard = () => {
+    if (openLogin) setOpenLogin(false);
+    if (openRegister) setOpenRegister(false);
+  };
+
+  const submit = () => setIsUpdateUser(true);
+
+  const sendData = () => {
+    if (openLogin) {
+      const { username, password } = newUser;
+      if (username && password) {
+        login({ username, password });
+      }
+    }
+    if (openRegister) {
+      register(newUser);
+    }
+    setUser(initStateUser);
   };
 
   useEffect(() => {
-    if (isSuccess) setUser(initStateLogin);
-  }, [isSuccess]);
+    if (isUpdateUser) {
+      sendData();
+      setIsUpdateUser(false);
+    }
+  }, [newUser]);
+
+  useEffect(() => {
+    if (isSuccessLogin) setUser(initStateUser);
+  }, [isSuccessLogin]);
 
   return (
     <>
@@ -80,7 +124,7 @@ function Header() {
               <ThemeProvider theme={secondaryTheme}>
                 {user
                   ? <UserMenu />
-                  : <AuthorizationButton color="white" openLogin={() => { setOpenLogin(true); }} />
+                  : <AuthorizationButton color="white" openLogin={() => { setOpenLogin(true); }} openRegister={() => { setOpenRegister(true); }} />
                 }
               </ThemeProvider>
             </Box>
@@ -88,13 +132,20 @@ function Header() {
         </Container>
       </AppBar>
       <ModalCard
-        title='Вход'
-        titleButton='Войти'
-        isSuccess={isSuccess}
-        isError={isError}
+        title={returnTitle()}
+        titleButton={returnButtonTitle()}
+        isSuccess={isSuccessLogin || isSuccessRegister}
+        isError={isErrorLogin || isErrorRegister}
         submit={submit}
-        open={openLogin} close={() => setOpenLogin(false)}>
-        <LoginFrom userForLogin={userForLogin} changeUser={changeUser} />
+        open={openLogin || openRegister}
+        close={closeCard}
+        formStyle={openRegister ? { display: 'grid' } : null}
+      >
+        {openLogin ?
+          <LoginFrom user={newUser} setUser={setUser} isUpdateUser={isUpdateUser} setIsUpdateUser={() => { setIsUpdateUser(false); }} />
+          :
+          <RegisterForm user={newUser} setUser={setUser} isUpdateUser={isUpdateUser} setIsUpdateUser={() => { setIsUpdateUser(false); }} />
+        }
       </ModalCard>
     </>
   );

@@ -6,5 +6,5 @@ export interface ILesson {
     price: number;
     age: number;
     staff_id: number;
-    staff_postion: string;
+    staff_position: string;
 }

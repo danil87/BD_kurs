@@ -4,15 +4,15 @@
     z-index: 0;
 }
 
-.MainImg_img{
+.MainImg_img {
     display: block;
     width: 100%;
 }
 
-.MainImg__description.circle.blue{
+.MainImg__description.circle.blue {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     padding-bottom: 10%;
     box-sizing: border-box;
 }
@@ -47,12 +47,12 @@
     left: 38%
 }
 
-.MainImg__Text1{
+.MainImg__Text1 {
     width: 70%;
-    margin: 0 auto;
+    margin: 50px auto;
 }
 
-.MainImg__description h2, 
+.MainImg__description h2,
 .MainImg__description p {
     color: white;
 }

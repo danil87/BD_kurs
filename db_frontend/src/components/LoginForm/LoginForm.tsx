@@ -27,13 +27,15 @@ const LoginFrom = ({ user, setUser, isUpdateUser, setIsUpdateUser }: Props) => {
     return (
         <>
             <TextField
-                label="Логин"
+                label="username"
                 variant="outlined"
                 color="info"
                 value={newUser.username}
                 onChange={(event) => changeUser('username', event.target.value)}
+                sx={{ margin: '0 50px 20px 50px' }}
             />
-            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined" color="info">
+            <FormControl variant="outlined" color="info"
+                sx={{ margin: '0 50px' }}>
                 <InputLabel color="info">Пароль</InputLabel>
                 <OutlinedInput
                     type={showPassword ? 'text' : 'password'}

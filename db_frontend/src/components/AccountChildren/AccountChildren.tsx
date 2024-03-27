@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { childHeader } from "../../headers";
 import childApi from "../../services/ChildService";
 import TableGrid from "../TableGrid/TableGrid";
@@ -8,6 +8,7 @@ import { useAppSelector } from "../../hooks/redux";
 import ModalCard from "../ModalCard/ModalCard";
 import ChildForm from "../ChildForm/ChildForm";
 import { IChild } from "../../models/IChild";
+import returnErrorMessage from "../../utils/returnErrorMessage";
 
 const initStateChild: IChild = {
     name: '',
@@ -28,8 +29,8 @@ const AccountChildren = () => {
     const [getChildren, { data: children, isLoading }] = childApi.useFetchAllChildMutation({
         fixedCacheKey: 'child'
     });
-    const [createChild, { isSuccess: isSuccessCreate, isError: isErrorCreate }] = childApi.useCreateNewChildMutation();
-    const [updateChild, { isSuccess: isSuccessUpdate, isError: isErrorUdpate }] = childApi.useUpdateChildMutation();
+    const [createChild, { isSuccess: isSuccessCreate, isError: isErrorCreate, error: errorCreate }] = childApi.useCreateNewChildMutation();
+    const [updateChild, { isSuccess: isSuccessUpdate, isError: isErrorUdpate, error: errorUpdate }] = childApi.useUpdateChildMutation();
 
 
     const openEditCard = (child: IChild) => {
@@ -83,7 +84,7 @@ const AccountChildren = () => {
     }, [newChild]);
 
     return (
-        <Box className='AccountChildren'>
+        <>
             <TableGrid row={children} isLoading={isLoading} tableHeader={childHeader} openEditCard={openEditCard} />
             <Button
                 sx={{ alignSelf: 'flex-end' }}
@@ -100,13 +101,13 @@ const AccountChildren = () => {
                 isSuccess={isSuccessCreate || isSuccessUpdate}
                 isError={isErrorCreate || isErrorUdpate}
                 submit={submit}
-                formStyle={{ display: 'grid' }}
                 successAlertText="Данные успешно сохранены!"
+                errorAlertText={returnErrorMessage(openNewChildCard, openEditChildCard, errorCreate, errorUpdate)}
             >
                 <ChildForm child={newChild} setChild={setNewChild}
                     isUpdateChild={isUpdateChild} setIsUpdateChild={() => { setIsUpdateChild(false); }} />
             </ModalCard>
-        </Box>
+        </>
     );
 };
 

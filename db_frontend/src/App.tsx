@@ -8,7 +8,7 @@ import Header from './components/Header/Header';
 import Main from './page/Main/Main';
 import Footer from './components/Footer/Footer';
 import ClassSchedule from './page/ClassSchedule/ClassSchedule';
-import UsersReviews from './page/UsersReviews/UsersReviews';
+import UsersFeedback from './page/UsersFeedback/UsersFeedback';
 import PersonalAccount from './page/PersonalAccount/PersonalAccount';
 import './App.css';
 import { mainTheme } from './theme';
@@ -49,12 +49,13 @@ const App = () => {
     <ThemeProvider theme={mainTheme}>
       <Box className="App">
         <Header />
-        <Box sx={{ marginTop: '82px' }}>
+        <Box sx={{ marginTop: '82px', flexGrow: 1 }}>
           <Routes>
             <Route path='/' element={<Main />} />
             <Route path='/schedule' element={user || localStorage.getItem('user') ? <ClassSchedule /> : <Navigate replace to={'/'} />} />
-            <Route path='/reviews' element={<UsersReviews />} />
+            <Route path='/feedbacks' element={<UsersFeedback />} />
             <Route path='/cabinet/*' element={user || localStorage.getItem('user') ? <PersonalAccount /> : <Navigate replace to={'/'} />} />
+            <Route path='*' element={<Navigate replace to={'/'} />} />
           </Routes>
         </Box>
         <Footer />

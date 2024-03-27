@@ -1,0 +1,33 @@
+.UsersFeedback {
+    margin: 3% auto 2% auto;
+    width: 45%;
+}
+
+.UsersFeedback__feedback {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.UsersFeedback__feedback-header,
+.feedback-header__user-info,
+.feedback-header__feedback-info {
+    display: flex;
+    align-items: center;
+}
+
+.UsersFeedback__feedback-header {
+    justify-content: space-between;
+    /* margin-bottom: 30px; */
+}
+
+.user-info__avatar,
+.feedback-info__date {
+    margin-right: 15px;
+}
+
+.UsersFeedback__body {
+    padding-left: 55px;
+    text-align: start;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}

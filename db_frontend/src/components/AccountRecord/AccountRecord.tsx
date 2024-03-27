@@ -1,5 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Box } from "@mui/system";
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import recordApi from "../../services/RecordService";
@@ -9,9 +7,10 @@ import { useAppSelector } from "../../hooks/redux";
 import ModalCard from "../ModalCard/ModalCard";
 import { Record } from "../../models/IRecord";
 import RecordCard from "../RecordCard/RecordCard";
-import './AccountRecord.css';
 import { ILesson } from "../../models/ILesson";
 import { IChild } from "../../models/IChild";
+import returnErrorMessage from "../../utils/returnErrorMessage";
+import './AccountRecord.css';
 
 const initStateRecord: Record = {
     childName: '',
@@ -30,8 +29,8 @@ const AccountRecord = () => {
     const [getRecords, { data: records, isLoading }] = recordApi.useFetchAllRecordMutation({
         fixedCacheKey: 'record'
     });
-    const [createRecord, { isSuccess: isSuccessCreate, isError: isErrorCreate }] = recordApi.useCreateNewRecordMutation();
-    const [updateRecord, { isSuccess: isSuccessUpdate, isError: isErrorUdpate }] = recordApi.useUpdateRecordMutation();
+    const [createRecord, { isSuccess: isSuccessCreate, isError: isErrorCreate, error: errorCreate }] = recordApi.useCreateNewRecordMutation();
+    const [updateRecord, { isSuccess: isSuccessUpdate, isError: isErrorUdpate, error: errorUpdate }] = recordApi.useUpdateRecordMutation();
 
     const changeLesson = (lesson: ILesson) => {
         setNewRecord({
@@ -55,8 +54,8 @@ const AccountRecord = () => {
     };
 
     const returnTitle = (): string => {
-        if (openNewRecordCard) return 'Регистрация ребёнка';
-        return 'Изменение данных ребёнка';
+        if (openNewRecordCard) return 'Добавление новой записи';
+        return 'Изменение запси';
     };
 
     const closeCard = () => {
@@ -91,7 +90,7 @@ const AccountRecord = () => {
     }, [user]);
 
     return (
-        <Box className='AccountRecord'>
+        <>
             <TableGrid isLoading={isLoading} row={records} tableHeader={recordHeader} openEditCard={openEditCard} />
             <Button
                 sx={{ alignSelf: 'flex-end' }}
@@ -107,10 +106,12 @@ const AccountRecord = () => {
                 isSuccess={isSuccessCreate || isSuccessUpdate}
                 isError={isErrorCreate || isErrorUdpate}
                 submit={submit}
+                successAlertText="Данные успешно сохранены!"
+                errorAlertText={returnErrorMessage(openNewRecordCard, openEditRecordCard, errorCreate, errorUpdate)}
             >
                 <RecordCard newRecord={newRecord} changeChild={changeChild} changeLesson={changeLesson} />
             </ModalCard>
-        </Box>
+        </>
     );
 };
 

@@ -6,6 +6,7 @@ import recordApi from "./services/RecordService";
 import staffApi from "./services/StaffService";
 import lessonApi from "./services/LessonService";
 import PaymentButton from "./components/PaymentButton/PaymentButton";
+import ButtonFeedback from "./components/ButtonFeedback/ButtonFeedback";
 
 export const lessonHeader: GridColDef[] = [
   {
@@ -30,7 +31,7 @@ export const lessonHeader: GridColDef[] = [
   {
     field: 'subscribe',
     headerName: 'Записаться',
-    width: 200,
+    width: 150,
     headerAlign: 'center',
     align: 'center',
     renderCell: (params: GridRenderCellParams) => (
@@ -42,7 +43,7 @@ export const lessonHeader: GridColDef[] = [
 export const removeButton: GridColDef = {
   field: 'delete',
   headerName: 'Удалить',
-  width: 200,
+  width: 100,
   headerAlign: 'center',
   align: 'center',
   renderCell: (params: GridRenderCellParams) => {
@@ -118,6 +119,10 @@ export const recordHeader: GridColDef[] = [
     renderCell: (params: GridRenderCellParams) => (
       <PaymentButton record={params.row} />
     ),
+  },
+  {
+    field: 'feddback', headerName: 'Отзыв', headerAlign: 'center', align: 'center', width: 150,
+    renderCell: (params: GridRenderCellParams) => (<ButtonFeedback lessonId={params.row.lessonId} />),
   },
   {
     field: 'delete', headerName: 'Удалить', headerAlign: 'center', align: 'center',

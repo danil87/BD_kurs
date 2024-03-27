@@ -1,3 +1,7 @@
+.ModalCard {
+    margin: 0 auto;
+}
+
 .ModalCard__form {
     width: 100%;
 }

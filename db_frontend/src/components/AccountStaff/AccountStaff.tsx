@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { useAppSelector } from "../../hooks/redux";
 import staffApi from "../../services/StaffService";
 import TableGrid from "../TableGrid/TableGrid";
 import { staffHeader } from "../../headers";
-import './AccountStaff.css';
 import ModalCard from "../ModalCard/ModalCard";
 import { IStaff } from "../../models/IStaff";
 import StaffForm from "../StaffFrom/StaffForm";
+import returnErrorMessage from "../../utils/returnErrorMessage";
+import './AccountStaff.css';
 
 const initStateStaff: IStaff = {
     position: '',
@@ -23,8 +24,8 @@ const AccountStaff = () => {
     const [getStaff, { data: staffs, isLoading }] = staffApi.useFetchAllStaffMutation({
         fixedCacheKey: 'staff'
     });
-    const [updateStaff, { isSuccess: isSuccessUpdate, isError: isErrorUdpate }] = staffApi.useUpdateStaffMutation();
-    const [createStaff, { isSuccess: isSuccessCreate, isError: isErrorCreate }] = staffApi.useCreateNewStaffMutation();
+    const [updateStaff, { isSuccess: isSuccessUpdate, isError: isErrorUdpate, error: errorCreate }] = staffApi.useUpdateStaffMutation();
+    const [createStaff, { isSuccess: isSuccessCreate, isError: isErrorCreate, error: errorUpdate }] = staffApi.useCreateNewStaffMutation();
 
 
 
@@ -45,7 +46,6 @@ const AccountStaff = () => {
             setNewStaff(initStateStaff);
         }
     };
-
 
     const submit = () => setIsUpdateStaff(true);
 
@@ -75,7 +75,7 @@ const AccountStaff = () => {
     }, [user]);
 
     return (
-        <Box className='AccountStaff'>
+        <>
             <TableGrid row={staffs} isLoading={isLoading} tableHeader={staffHeader} openEditCard={openEditCard} />
             <Button
                 sx={{ alignSelf: 'flex-end' }}
@@ -91,13 +91,13 @@ const AccountStaff = () => {
                 isSuccess={isSuccessCreate || isSuccessUpdate}
                 isError={isErrorCreate || isErrorUdpate}
                 submit={submit}
-                formStyle={{ display: 'grid' }}
                 successAlertText="Данные успешно сохранены!"
+                errorAlertText={returnErrorMessage(openNewStaffCard, openEditStaffCard, errorCreate, errorUpdate)}
             >
                 <StaffForm staff={newStaff} setStaff={setNewStaff}
                     isUpdateStaff={isUpdateStaff} setIsUpdateStaff={() => { setIsUpdateStaff(false); }} />
             </ModalCard>
-        </Box>
+        </>
     );
 };
 

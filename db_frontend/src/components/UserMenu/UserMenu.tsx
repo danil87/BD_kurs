@@ -40,11 +40,13 @@ function UserMenu({ openRegister }: Props) {
 
   return (
     <Box sx={{ alignSelf: 'center' }}>
-      <Button color='secondary'
-        sx={{ marginRight: '10px' }}
-        onClick={openRegister}>
-        Зарегистрировать пользователя
-      </Button>
+      {user?.is_superuser &&
+        <Button color='secondary'
+          sx={{ marginRight: '10px' }}
+          onClick={openRegister}>
+          Зарегистрировать пользователя
+        </Button>
+      }
       <Button color='secondary'
         sx={{ my: 1 }}
         onClick={openMenu}>

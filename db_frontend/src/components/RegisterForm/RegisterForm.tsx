@@ -44,7 +44,7 @@ const RegisterForm = ({ oldUser, setUser, isUpdateUser, setIsUpdateUser }: Props
             {keys.map(key => {
                 if (key === 'password') {
                     return (
-                        <FormControl key={key} sx={{ margin: '10px 0' }} variant="outlined" color="info">
+                        <FormControl key={key} sx={{ margin: '15px 20px 0 20px' }} variant="outlined" color="info">
                             <InputLabel color="info">Пароль</InputLabel>
                             <OutlinedInput
                                 type={showPassword ? 'text' : 'password'}
@@ -69,7 +69,7 @@ const RegisterForm = ({ oldUser, setUser, isUpdateUser, setIsUpdateUser }: Props
                 if (key === 'is_superuser') {
                     return (
                         user?.is_superuser &&
-                        <FormControl key={key}>
+                        <FormControl key={key} sx={{ margin: '15px 20px 0 20px' }}>
                             <FormControlLabel
                                 label='Администратор'
                                 control={
@@ -90,7 +90,7 @@ const RegisterForm = ({ oldUser, setUser, isUpdateUser, setIsUpdateUser }: Props
                         color="info"
                         value={newUser[key as keyof IUser]}
                         onChange={(event) => changeUser(key, event.target.value)}
-                        sx={{ margin: '10px 0' }}
+                        sx={{ margin: '15px 20px 0 20px' }}
                     />);
             })}
         </>

@@ -15,24 +15,30 @@ interface Props {
     children: JSX.Element;
     formStyle?: React.CSSProperties | null;
     successAlertText?: string;
+    errorAlertText?: () => string;
 }
 
-const ModalCard = ({ title, titleButton, open, close, isSuccess, isError, submit, children, formStyle, successAlertText }: Props) => {
+const ModalCard = ({ title, titleButton, open, close, isSuccess, isError, submit, children, successAlertText, errorAlertText, formStyle }: Props) => {
     const [isOpenAlert, setIsOpenAlert] = useState<boolean>(false);
 
     useEffect(() => {
         if (isSuccess || isError) setIsOpenAlert(true);
-        const timer = setTimeout(() => setIsOpenAlert(false), 2000);
+        const timer = setTimeout(() => setIsOpenAlert(false), 3000);
 
         return () => clearTimeout(timer);
     }, [isSuccess, isError]);
 
+    // useEffect(() => {
+    //     console.log(children);
+    // }, [children]);
+
     return (
         <ThemeProvider theme={secondaryTheme}>
             <Modal
+                className='ModalCard'
                 open={open}
                 onClose={close}
-                sx={{ width: '40%', margin: '0 auto', top: '10%' }}
+                sx={{ width: '30%', top: '10%' }}
             >
                 <Card sx={{ position: 'relative' }}>
                     <CardContent>
@@ -45,7 +51,7 @@ const ModalCard = ({ title, titleButton, open, close, isSuccess, isError, submit
                         {isError && isOpenAlert &&
                             <Alert className="ModalCard__alert"
                                 severity="error">
-                                Что-то пошло не так, попробуйте позже :(
+                                {errorAlertText && errorAlertText() ? errorAlertText() : 'Что-то пошло не так, попробуйте позже :('}
                             </Alert>
                         }
                         <Box
@@ -56,12 +62,12 @@ const ModalCard = ({ title, titleButton, open, close, isSuccess, isError, submit
                             </Typography>
                         </Box>
                         <Box className="ModalCard__form"
-                            sx={formStyle || { display: 'flex', justifyContent: 'space-around' }}>
+                            sx={{ display: 'grid' }}>
                             {children}
                         </Box>
                     </CardContent>
-                    <CardActions sx={{ justifyContent: 'flex-end', marginRight: '35px' }}>
-                        <Button size="small" color='info' onClick={submit}>
+                    <CardActions sx={{ justifyContent: 'flex-end', marginRight: '20px' }}>
+                        <Button size="small" variant="outlined" color='info' onClick={submit} sx={{ padding: '5px 10px' }}>
                             {titleButton}
                         </Button>
                     </CardActions>

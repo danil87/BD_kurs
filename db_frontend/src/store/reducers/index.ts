@@ -8,6 +8,7 @@ import { authSlice } from "./authSlice";
 import authApi from "../../services/AuthService";
 import checkAuthApi from "../../services/CheckAuthService";
 import paymentApi from "../../services/PaymentService";
+import feedbackApi from "../../services/FeedbackService";
 
 export const rootReducer = combineReducers({
     [staffApi.reducerPath]: staffApi.reducer,
@@ -18,6 +19,7 @@ export const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
     [checkAuthApi.reducerPath]: checkAuthApi.reducer,
     [paymentApi.reducerPath]: paymentApi.reducer,
+    [feedbackApi.reducerPath]: feedbackApi.reducer,
     auth: authSlice.reducer
 });
 

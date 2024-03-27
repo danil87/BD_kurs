@@ -7,6 +7,7 @@ import { IChild } from "../../models/IChild";
 import recordApi from "../../services/RecordService";
 import { Record } from "../../models/IRecord";
 import { useAppSelector } from "../../hooks/redux";
+import returnErrorMessage from "../../utils/returnErrorMessage";
 
 type Props = {
     idLesson: number,
@@ -25,7 +26,7 @@ const ButtonTable = ({ idLesson, lessonName }: Props) => {
     const { user } = useAppSelector(state => state.auth);
     const [open, setOpen] = useState<boolean>(false);
     const [newRecord, setNewRecord] = useState(initStateRecord);
-    const [createRecord, { isSuccess, isError }] = recordApi.useCreateNewRecordMutation();
+    const [createRecord, { isSuccess, isError, error }] = recordApi.useCreateNewRecordMutation();
 
     const changeLesson = (lesson: ILesson) => {
         setNewRecord({
@@ -67,7 +68,8 @@ const ButtonTable = ({ idLesson, lessonName }: Props) => {
     return (
         <>
             <Button
-                color='success'
+                color='info'
+                variant="outlined"
                 onClick={openCard}
                 sx={{ my: 2 }}
             >
@@ -82,6 +84,8 @@ const ButtonTable = ({ idLesson, lessonName }: Props) => {
                     isSuccess={isSuccess}
                     isError={isError}
                     submit={submit}
+                    successAlertText="Данные успешно сохранены"
+                    errorAlertText={returnErrorMessage(open, false, error, undefined)}
                 >
                     <RecordCard newRecord={newRecord} changeLesson={changeLesson} changeChild={changeChild} />
                 </ModalCard>

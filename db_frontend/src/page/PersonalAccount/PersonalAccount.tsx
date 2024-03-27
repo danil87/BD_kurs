@@ -11,6 +11,7 @@ import AccountStaff from '../../components/AccountStaff/AccountStaff';
 import { useAppSelector } from '../../hooks/redux';
 import './PersonalAccount.css';
 import AccountPayment from '../../components/AccountPayment/AccountPayment';
+import UsersFeedback from '../UsersFeedback/UsersFeedback';
 
 const PersonalAccount = () => {
   const { user } = useAppSelector(state => state.auth);
@@ -18,13 +19,16 @@ const PersonalAccount = () => {
     <ThemeProvider theme={secondaryTheme}>
       <Box className="PersonalAccount">
         <AccountMenu />
-        <Routes>
-          <Route path='/' element={<AccountInfo />} />
-          <Route path='child' element={<AccountChildren />} />
-          <Route path='record' element={<AccountRecord />} />
-          <Route path='staff' element={user?.is_superuser ? <AccountStaff /> : <Navigate replace to='/' />} />
-          <Route path='payment' element={<AccountPayment />} />
-        </Routes>
+        <Box className="PersonalAccount__detail">
+          <Routes>
+            <Route path='/' element={<AccountInfo />} />
+            <Route path='child' element={<AccountChildren />} />
+            <Route path='record' element={<AccountRecord />} />
+            <Route path='staff' element={user?.is_superuser ? <AccountStaff /> : <Navigate replace to='/' />} />
+            <Route path='payment' element={<AccountPayment />} />
+            <Route path='feedback' element={<UsersFeedback accountView />} />
+          </Routes>
+        </Box>
       </Box>
     </ThemeProvider>
   );

@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { IUser } from "../../models/IParent";
 import parentApi from "../../services/ParanrtService";
 import { updateStoreUser } from "../../store/reducers/authSlice";
+import returnErrorMessage from "../../utils/returnErrorMessage";
 
 const keys = ['name', 'username', 'email', 'phoneNumber', 'address'];
 
@@ -15,7 +16,7 @@ const AccountInfo = () => {
     const { user } = useAppSelector(state => state.auth);
     const [userKeys, setUserKeys] = useState<string[]>([]);
     const [userForm, setUserForm] = useState<IUser | null>(null);
-    const [updateUser, { isSuccess, isError }] = parentApi.useUpdateParentMutation();
+    const [updateUser, { isSuccess, isError, error }] = parentApi.useUpdateParentMutation();
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -44,27 +45,31 @@ const AccountInfo = () => {
     return (
         <ThemeProvider theme={secondaryTheme}>
             <Box className="AccountInfo">
-                {isSuccess && <Alert severity="success">Данные успешно обновлены</Alert>}
-                {isError && <Alert severity="error">Что-то пошло не так :(</Alert>}
+                <Box>
+                    {isSuccess && <Alert severity="success">Данные успешно обновлены</Alert>}
+                    {isError && <Alert severity="error">
+                        {returnErrorMessage(isError, false, error, undefined)() || 'Что-то пошло не так :('}
+                    </Alert>}
 
-                {userKeys.map(key => (
-                    <Box key={key}
-                        sx={{ margin: '10px' }}>
-                        <TextField
-                            color="primary"
-                            label={key}
-                            variant="outlined"
-                            onChange={(event) => changeUserForm(key, event.target.value)}
-                            value={userForm ? userForm[key as keyof IUser] : ''} />
-                    </Box>
-                ))}
+                    {userKeys.map(key => (
+                        <Box key={key}>
+                            <TextField
+                                color="primary"
+                                label={key}
+                                variant="outlined"
+                                onChange={(event) => changeUserForm(key, event.target.value)}
+                                value={userForm ? userForm[key as keyof IUser] : ''}
+                                sx={{ margin: '10px 20px', width: '40%' }} />
+                        </Box>
+                    ))}
+                </Box>
                 <Button
                     sx={{ alignSelf: 'flex-end' }}
                     onClick={submit}>
                     Сохранить
                 </Button>
             </Box>
-        </ThemeProvider>
+        </ThemeProvider >
     );
 };
 

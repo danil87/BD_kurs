@@ -23,10 +23,15 @@ const menuItem = [
         path: 'payment'
     },
     {
+        title: 'Мои отзывы',
+        path: 'feedback'
+    },
+    {
         title: 'Сотрудники',
         path: 'staff'
     }
 ];
+
 
 const AccountMenu = () => {
     const { user } = useAppSelector(state => state.auth);
@@ -34,6 +39,11 @@ const AccountMenu = () => {
     return (
         <Box className="AccountMenu">
             <Drawer
+                classes={{
+                    paper: {
+                        height: 'calc(100% - 64px)',
+                    }.toString()
+                }}
                 variant="permanent"
                 sx={{
                     display: { xs: "none", sm: "block" },
@@ -59,6 +69,10 @@ const AccountMenu = () => {
                             </Link>
                         ))}
                     </List>
+                    <Toolbar />
+                    <Toolbar />
+                    <Toolbar />
+                    <Toolbar />
                 </div>
             </Drawer>
         </Box >

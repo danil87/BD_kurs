@@ -2,11 +2,11 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useEffect } from "react";
 import lessonApi from "../../services/LessonService";
 import childApi from "../../services/ChildService";
-import './RecordCard.css';
 import { useAppSelector } from "../../hooks/redux";
 import { Record } from "../../models/IRecord";
 import { ILesson } from "../../models/ILesson";
 import { IChild } from "../../models/IChild";
+import './RecordCard.css';
 
 type Props = {
     newRecord: Record,
@@ -28,9 +28,7 @@ const RecordCard = ({ newRecord, changeLesson, changeChild }: Props) => {
 
     return (
         <>
-            <FormControl
-                sx={{ width: '200px' }}
-            >
+            <FormControl sx={{ margin: '10px' }}>
                 <InputLabel color="info">Занятие</InputLabel>
                 <Select
                     className="RecordCard__form__select"
@@ -46,9 +44,7 @@ const RecordCard = ({ newRecord, changeLesson, changeChild }: Props) => {
                     ))}
                 </Select>
             </FormControl>
-            <FormControl
-                sx={{ width: '200px' }}
-            >
+            <FormControl sx={{ margin: '10px' }}>
                 <InputLabel color="info">Ребёнок</InputLabel>
                 <Select
                     className="RecordCard__form__select"

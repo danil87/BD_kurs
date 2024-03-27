@@ -18,6 +18,7 @@ import { useAppSelector } from '../../hooks/redux';
 import parentApi from '../../services/ParanrtService';
 import { IUser } from '../../models/IParent';
 import RegisterForm from '../RegisterForm/RegisterForm';
+import returnErrorMessage from '../../utils/returnErrorMessage';
 
 const pages = [
   {
@@ -30,7 +31,7 @@ const pages = [
   },
   {
     title: 'Отзывы',
-    path: '/reviews',
+    path: '/feedbacks',
   },
 ];
 
@@ -49,8 +50,8 @@ function Header() {
   const [openRegister, setOpenRegister] = useState(false);
   const [newUser, setUser] = useState<IUser>(initStateUser);
   const [isUpdateUser, setIsUpdateUser] = useState<boolean>(false);
-  const [login, { isSuccess: isSuccessLogin, isError: isErrorLogin }] = authApi.useLoginMutation();
-  const [register, { isSuccess: isSuccessRegister, isError: isErrorRegister }] = parentApi.useCreateNewParentMutation();
+  const [login, { isSuccess: isSuccessLogin, isError: isErrorLogin, error: errorLogin }] = authApi.useLoginMutation();
+  const [register, { isSuccess: isSuccessRegister, isError: isErrorRegister, error: errorRegister }] = parentApi.useCreateNewParentMutation();
 
 
   const returnTitle = () => {
@@ -71,15 +72,15 @@ function Header() {
 
   const submit = () => setIsUpdateUser(true);
 
-  const sendData = () => {
+  const sendData = async () => {
     if (openLogin) {
       const { username, password } = newUser;
       if (username && password) {
-        login({ username, password });
+        await login({ username, password });
       }
     }
     if (openRegister) {
-      register(newUser);
+      await register(newUser);
     }
     setUser(initStateUser);
   };
@@ -140,7 +141,9 @@ function Header() {
         submit={submit}
         open={openLogin || openRegister}
         close={closeCard}
-        formStyle={openRegister ? { display: 'grid' } : null}
+        successAlertText='Успех!'
+        errorAlertText={returnErrorMessage(openLogin, openRegister, errorLogin, errorRegister)}
+        formStyle={{ width: '30%', top: '10%' }}
       >
         {openLogin ?
           <LoginFrom user={newUser} setUser={setUser} isUpdateUser={isUpdateUser} setIsUpdateUser={() => { setIsUpdateUser(false); }} />

@@ -47,11 +47,6 @@ const ButtonFeedback = ({ lessonId }: Props) => {
     }, [newFeedback]);
 
     useEffect(() => {
-        console.log(isError);
-        if (isError) console.log(returnErrorMessage(openCreateFeedbackCard, false, {}, error)());
-    }, [isError]);
-
-    useEffect(() => {
         if (user?.id) {
             setNewFeedback({
                 ...newFeedback,
